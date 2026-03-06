@@ -46,6 +46,14 @@ public class Question {
         Question.allTheQuestions = allTheQuestions;
     }
 
+    @Override
+    public String toString() {
+        return "Question{" +
+                "questionNumber=" + questionNumber +
+                ", theQuestion='" + theQuestion + '\'' +
+                ", theAnswers=" + theAnswers +
+                '}';
+    }
 
     public static void readQuestions(){
 
