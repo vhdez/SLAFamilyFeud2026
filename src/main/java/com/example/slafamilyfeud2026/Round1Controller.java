@@ -8,41 +8,40 @@ import javax.swing.*;
 import javax.swing.text.html.ImageView;
 
 public class Round1Controller {
-    @FXML
-    private Label welcomeText;
-    ImageView backgroundImage;
-    Label	team1Score;
-    Label	team2Score;
-    Label	roundScore;
-    GridPane Answers;
-   Label Answer1;
-    Label	Answer2;
-    Label	Answer3;
-    Label	Answer4;
-    Label	Answer5;
-    Label	Answer6;
-    Label	Answer7;
-    Label	Answer8;
 
-    Integer team1Score
-    Integer team2Score
-    Integer currentRoundScore;
-    Integer XsCount;
-    Integer currentQuestionNum;
+    public ImageView backgroundImage;
+    public Label	team1Score;
+    public Label	team2Score;
+    public Label	roundScore;
+    public GridPane Answers;
+    public Label    Answer1;
+    public Label	Answer2;
+    public Label	Answer3;
+    public Label	Answer4;
+    public Label	Answer5;
+    public Label	Answer6;
+    public Label	Answer7;
+    public Label	Answer8;
 
-
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
+    private int team1score = 0;
+    private int team2score = 0;
+    private int currentRoundScore = 0;
+    private int XsCount = 0;
+    private int currentQuestionNum = 0;
 
     public void initialize() throws Exception {
-        public void selectTeam () throws Exception;
 
     }
 
-    public void currentQuestion() throws Exception;
-}
-public void nextQuestion() throws Exception;
+    public void selectTeam() throws Exception{
 
+    }
+
+    public void currentQuestion() throws Exception {
+
+    }
+
+    public void nextQuestion() throws Exception {
+
+    }
 }
