@@ -55,7 +55,10 @@ public class Round1Controller {
     }
 
     public void selectTeam(int newTeam) throws Exception{
+        currentTeam = newTeam;
+        if (currentTeam == 0) {
 
+        }
     }
 
     public void currentQuestion(KeyCode keyCode) throws Exception {
