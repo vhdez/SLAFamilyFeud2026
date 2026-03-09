@@ -2,6 +2,8 @@ package com.example.slafamilyfeud2026;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
 import javax.swing.*;
@@ -25,23 +27,44 @@ public class Round1Controller {
 
     private int team1score = 0;
     private int team2score = 0;
+    private int currentTeam = 0;
     private int currentRoundScore = 0;
     private int XsCount = 0;
     private int currentQuestionNum = 0;
+    private Question currentQuestion;
 
     public void initialize() throws Exception {
+        currentQuestion = Question.getAllTheQuestions().get(currentQuestionNum);
+        System.out.println(currentQuestion.getTheQuestion());
+    }
+
+    public void processKeyEvent(KeyEvent event) throws Exception {
+        if (event.getCode() == KeyCode.ENTER) {
+            nextQuestion();
+        } else if (event.getCode() == KeyCode.LEFT) {
+            selectTeam(1);
+        } else if (event.getCode() == KeyCode.RIGHT) {
+            selectTeam(2);
+        } else if (event.getCode() == KeyCode.DOWN) {
+            selectTeam(0);
+        } else if (event.getCode() == KeyCode.UP) {
+            selectTeam(3);
+        } else {
+            currentQuestion(event.getCode());
+        }
+    }
+
+    public void selectTeam(int newTeam) throws Exception{
 
     }
 
-    public void selectTeam() throws Exception{
-
-    }
-
-    public void currentQuestion() throws Exception {
+    public void currentQuestion(KeyCode keyCode) throws Exception {
 
     }
 
     public void nextQuestion() throws Exception {
+        currentQuestionNum++;
+        currentQuestion = Question.getAllTheQuestions().get(currentQuestionNum);
 
     }
 }
