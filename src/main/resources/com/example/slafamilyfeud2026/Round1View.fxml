@@ -12,7 +12,7 @@
     <ImageView fx:id="backgroundImage"
                fitWidth="800" fitHeight="600"
                preserveRatio="false"
-               AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" />
+               AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" />c
 
 
     <HBox spacing="0" prefWidth="800"
