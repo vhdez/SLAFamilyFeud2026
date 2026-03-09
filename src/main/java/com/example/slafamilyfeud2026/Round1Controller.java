@@ -2,12 +2,10 @@ package com.example.slafamilyfeud2026;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-
-import javax.swing.*;
-import javax.swing.text.html.ImageView;
 
 public class Round1Controller {
 
@@ -34,6 +32,7 @@ public class Round1Controller {
     private Question currentQuestion;
 
     public void initialize() throws Exception {
+        Question.readQuestions();
         currentQuestion = Question.getAllTheQuestions().get(currentQuestionNum);
         System.out.println(currentQuestion.getTheQuestion());
     }
