@@ -5,6 +5,21 @@ public class Answer {
     Integer itsScore;
     Boolean answered;
 
+    public Answer(String anAnswer, Integer itsScore, Boolean answered) {
+        this.anAnswer = anAnswer;
+        this.itsScore = itsScore;
+        this.answered = answered;
+    }
+
+    @Override
+    public String toString() {
+        return "Answer{" +
+                "anAnswer='" + anAnswer + '\'' +
+                ", itsScore=" + itsScore +
+                ", answered=" + answered +
+                '}';
+    }
+
     public Boolean getAnswered() {
         return answered;
     }
@@ -28,5 +43,4 @@ public class Answer {
     public void setAnAnswer(String anAnswer) {
         this.anAnswer = anAnswer;
     }
-
 }
