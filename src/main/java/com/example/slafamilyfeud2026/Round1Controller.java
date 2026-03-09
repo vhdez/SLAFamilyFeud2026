@@ -77,4 +77,8 @@ public class Round1Controller {
         Answer8.setText(String.valueOf(8));
 
     }
+
+    public void switchToRound2() throws Exception {
+
+    }
 }
