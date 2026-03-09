@@ -35,7 +35,7 @@ public class Round1Controller {
 
     public void initialize() throws Exception {
         currentQuestion = Question.getAllTheQuestions().get(currentQuestionNum);
-        System.out.println()
+        System.out.println(currentQuestion.getTheQuestion());
     }
 
     public void processKeyEvent(KeyEvent event) throws Exception {
