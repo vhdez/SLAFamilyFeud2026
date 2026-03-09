@@ -35,6 +35,7 @@ public class Round1Controller {
 
     public void initialize() throws Exception {
         currentQuestion = Question.getAllTheQuestions().get(currentQuestionNum);
+        System.out.println()
     }
 
     public void processKeyEvent(KeyEvent event) throws Exception {
@@ -62,6 +63,8 @@ public class Round1Controller {
     }
 
     public void nextQuestion() throws Exception {
+        currentQuestionNum++;
+        currentQuestion = Question.getAllTheQuestions().get(currentQuestionNum);
 
     }
 }
