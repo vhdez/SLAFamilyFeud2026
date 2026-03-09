@@ -67,6 +67,14 @@ public class Round1Controller {
     public void nextQuestion() throws Exception {
         currentQuestionNum++;
         currentQuestion = Question.getAllTheQuestions().get(currentQuestionNum);
+        Answer1.setText(String.valueOf(1));
+        Answer2.setText(String.valueOf(2));
+        Answer3.setText(String.valueOf(3));
+        Answer4.setText(String.valueOf(4));
+        Answer5.setText(String.valueOf(5));
+        Answer6.setText(String.valueOf(6));
+        Answer7.setText(String.valueOf(7));
+        Answer8.setText(String.valueOf(8));
 
     }
 }
