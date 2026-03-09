@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Question {
-    public int questionNumber;
-    public String theQuestion;
-    ArrayList<Answer> theAnswers;
+    private int questionNumber;
+    private String theQuestion;
+    private ArrayList<Answer> theAnswers;
     static ArrayList<Question> allTheQuestions;
 
     public Question(int questionNumber, String theQuestion, ArrayList<Answer> theAnswers) {
@@ -73,8 +73,8 @@ public class Question {
 
             while(lineScanner.hasNext()) {
                 Answer newAnswer = new Answer("",0,false);
-                newAnswer.anAnswer=lineScanner.next();
-                newAnswer.itsScore=lineScanner.nextInt();
+                newAnswer.setAnAnswer(lineScanner.next());
+                newAnswer.setItsScore(lineScanner.nextInt());
                 answers.add(newAnswer);
                 System.out.println(newAnswer);
             }

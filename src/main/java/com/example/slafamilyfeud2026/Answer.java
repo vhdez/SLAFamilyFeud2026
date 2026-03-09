@@ -1,9 +1,9 @@
 package com.example.slafamilyfeud2026;
 
 public class Answer {
-    String anAnswer;
-    Integer itsScore;
-    Boolean answered;
+    private String anAnswer;
+    private Integer itsScore;
+    private Boolean answered;
 
     public Answer(String anAnswer, Integer itsScore, Boolean answered) {
         this.anAnswer = anAnswer;
