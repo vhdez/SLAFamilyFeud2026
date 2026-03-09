@@ -1,6 +1,8 @@
 package com.example.slafamilyfeud2026;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Question {
     public int questionNumber;
@@ -55,8 +57,32 @@ public class Question {
                 '}';
     }
 
-    public static void readQuestions(){
+    public static void readQuestions() throws Exception{
+        File myData = new File("src/main/java/com/example/slafamilyfeud2026/FamilyFeudInputData");
+        Scanner myReader = new Scanner(myData);
+        allTheQuestions = new ArrayList<Question>();
+        int currentQuestion = 0;
+        while (myReader.hasNextLine()){
+            String dataLine = myReader.nextLine();
+            Scanner lineScanner = new Scanner(dataLine);
+            lineScanner.useDelimiter("\t");
+            currentQuestion+=1;
+            String theQuestion = lineScanner.next();
 
+            ArrayList<Answer> answers = new ArrayList<>();
 
+            while(lineScanner.hasNext()) {
+                Answer newAnswer = new Answer("",0,false);
+                newAnswer.anAnswer=lineScanner.next();
+                newAnswer.itsScore=lineScanner.nextInt();
+                answers.add(newAnswer);
+                System.out.println(newAnswer);
+            }
+
+            Question newQuestion = new Question(currentQuestion,theQuestion,answers);
+            System.out.println(newQuestion.toString());
+            allTheQuestions.add(newQuestion);
+
+        }
     }
 }
