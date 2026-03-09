@@ -2,10 +2,10 @@ package com.example.slafamilyfeud2026;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
-import javax.swing.*;
-import javax.swing.text.html.ImageView;
+
 
 public class Round1Controller {
 
