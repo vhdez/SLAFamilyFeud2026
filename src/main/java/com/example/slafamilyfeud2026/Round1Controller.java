@@ -70,10 +70,12 @@ public class Round1Controller {
     public void displayCurrentQuestionAnswers() {
         System.out.println("QUESTION: " + currentQuestion.getTheQuestion());
         int i = 1;
+        System.out.print("  ANSWERS:");
         for (Answer answer : currentQuestion.getTheAnswers()) {
-            System.out.println("     ANSWER #" + i + " " + answer.getAnAnswer());
+            System.out.print("  #" + i + " " + answer.getAnAnswer());
             i = i + 1;
         }
+        System.out.print("\n");
     }
 
     public void setupHandlers() {
@@ -93,26 +95,26 @@ public class Round1Controller {
     public void processKeyEvent(KeyEvent event) throws Exception {
         if (event.getCode() == KeyCode.ENTER) {
             nextQuestion();
-            System.out.println("ACTION: Next Question displayed");
+            System.out.print(" ENTER ");
             this.displayInstructions();
             this.displayCurrentQuestionAnswers();
         } else if (event.getCode() == KeyCode.D) {
             displayCurrentQuestionAnswers();
         } else if (event.getCode() == KeyCode.LEFT) {
             selectTeam(1);
-            System.out.println("ACTION: Select Team 1");
+            System.out.print(" LEFT ");
         } else if (event.getCode() == KeyCode.RIGHT) {
             selectTeam(2);
-            System.out.println("ACTION: Select Team 2");
+            System.out.print(" RIGHT ");
         } else if (event.getCode() == KeyCode.SHIFT){
-            System.out.println("ACTION: Switch to Round 2");
+            System.out.print(" SHIFT ");
             FamilyFeudApp.Round2();
         } else if (event.getCode() == KeyCode.X) {
             wrongAnswer();
-            System.out.println("ACTION: Wrong answer X");
+            System.out.print(" X ");
         } else if (event.getCode() == KeyCode.C) {
             closeWrongAnswer();
-            System.out.println("ACTION: Close Wrong answer X");
+            System.out.print(" C ");
         } else if (event.getCode() == KeyCode.H){
             this.displayInstructions();
         } else {
@@ -149,7 +151,7 @@ public class Round1Controller {
                 labelTransition(Answer1, currentQuestion.getTheAnswers().get(0).getAnAnswer());
                 labelTransition(score1, currentQuestion.getTheAnswers().get(0).getItsScore().toString());
                 currentRoundScore += currentQuestion.getTheAnswers().get(0).getItsScore();
-                System.out.println("ACTION: Answer 1 chosen");
+                System.out.print(" 1 ");
             }
         } else if (keyCode == KeyCode.DIGIT2) {
             if (currentQuestion.getTheAnswers().size() < 2) {
@@ -160,7 +162,7 @@ public class Round1Controller {
                 labelTransition(Answer2, currentQuestion.getTheAnswers().get(1).getAnAnswer());
                 labelTransition(score2, currentQuestion.getTheAnswers().get(1).getItsScore().toString());
                 currentRoundScore += currentQuestion.getTheAnswers().get(1).getItsScore();
-                System.out.println("ACTION: Answer 2 chosen");
+                System.out.print(" 2 ");
             }
         } else if (keyCode == KeyCode.DIGIT3) {
             if (currentQuestion.getTheAnswers().size() < 3) {
@@ -171,7 +173,7 @@ public class Round1Controller {
                 labelTransition(Answer3, currentQuestion.getTheAnswers().get(2).getAnAnswer());
                 labelTransition(score3, currentQuestion.getTheAnswers().get(2).getItsScore().toString());
                 currentRoundScore += currentQuestion.getTheAnswers().get(2).getItsScore();
-                System.out.println("ACTION: Answer 3 chosen");
+                System.out.print(" 3 ");
             }
         } else if (keyCode == KeyCode.DIGIT4) {
             if (currentQuestion.getTheAnswers().size() < 4) {
@@ -182,7 +184,7 @@ public class Round1Controller {
                 labelTransition(Answer4, currentQuestion.getTheAnswers().get(3).getAnAnswer());
                 labelTransition(score4, currentQuestion.getTheAnswers().get(3).getItsScore().toString());
                 currentRoundScore += currentQuestion.getTheAnswers().get(3).getItsScore();
-                System.out.println("ACTION: Answer 4 chosen");
+                System.out.print(" 4 ");
 
             }
         } else if (keyCode == KeyCode.DIGIT5) {
@@ -194,7 +196,7 @@ public class Round1Controller {
                 labelTransition(Answer5, currentQuestion.getTheAnswers().get(4).getAnAnswer());
                 labelTransition(score5, currentQuestion.getTheAnswers().get(4).getItsScore().toString());
                 currentRoundScore += currentQuestion.getTheAnswers().get(4).getItsScore();
-                System.out.println("ACTION: Answer 5 chosen");
+                System.out.print(" 5 ");
             }
         } else if (keyCode == KeyCode.DIGIT6) {
             if (currentQuestion.getTheAnswers().size() < 6) {
@@ -205,7 +207,7 @@ public class Round1Controller {
                 labelTransition(Answer6, currentQuestion.getTheAnswers().get(5).getAnAnswer());
                 labelTransition(score6, currentQuestion.getTheAnswers().get(5).getItsScore().toString());
                 currentRoundScore += currentQuestion.getTheAnswers().get(5).getItsScore();
-                System.out.println("ACTION: Answer 6 chosen");
+                System.out.print(" 6 ");
             }
         } else if (keyCode == KeyCode.DIGIT7) {
             if (currentQuestion.getTheAnswers().size() < 7) {
@@ -216,7 +218,7 @@ public class Round1Controller {
                 labelTransition(Answer7, currentQuestion.getTheAnswers().get(6).getAnAnswer());
                 labelTransition(score7, currentQuestion.getTheAnswers().get(6).getItsScore().toString());
                 currentRoundScore += currentQuestion.getTheAnswers().get(6).getItsScore();
-                System.out.println("ACTION: Answer 7 chosen");
+                System.out.print(" 7 ");
             }
         } else if (keyCode == KeyCode.DIGIT8) {
             if (currentQuestion.getTheAnswers().size() < 8) {
@@ -227,7 +229,7 @@ public class Round1Controller {
                 labelTransition(Answer8, currentQuestion.getTheAnswers().get(7).getAnAnswer());
                 labelTransition(score8, currentQuestion.getTheAnswers().get(7).getItsScore().toString());
                 currentRoundScore += currentQuestion.getTheAnswers().get(7).getItsScore();
-                System.out.println("ACTION: Answer 8 chosen");
+                System.out.print(" 8 ");
             }
         }
         roundScore.setText("Round: " + currentRoundScore);
