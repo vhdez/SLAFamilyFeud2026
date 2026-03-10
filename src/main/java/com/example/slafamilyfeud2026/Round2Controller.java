@@ -1,7 +1,10 @@
 package com.example.slafamilyfeud2026;
 
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+
+import java.sql.Array;
 
 public class Round2Controller {
     public Label phaseLabel;
@@ -27,4 +30,20 @@ public class Round2Controller {
     public Label score8;
     public Label score9;
     public Label score10;
+
+    Integer playerTurn;
+    Question currentQuestion;
+    ArrayList<Integer> selectedAnswers;
+    ArrayList<Question> round2Questions;
+
+    Label[] answerLabels;
+    Label[] scoreLabels;
+
+}
+
+@FXML
+public void initialize() throws Exception {
+
+
+
 }
