@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class FamilyFeudApp extends Application {
+    static Stage mainStage;
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(FamilyFeudApp.class.getResource("Round1View.fxml"));
@@ -15,5 +17,19 @@ public class FamilyFeudApp extends Application {
         stage.setTitle("Family Feud");
         stage.setScene(scene);
         stage.show();
+        mainStage = stage;
+    }
+
+    public static void Round1() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("Round1View.fxml"));
+        Scene newScene = new Scene(fxmlLoader.load(), 500, 500);
+        mainStage.setScene(newScene);
+    }
+
+    public static void Round2() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("Round2View.fxml"));
+        Scene newScene = new Scene(fxmlLoader.load(), 500, 500);
+        mainStage.setScene(newScene);
     }
 }
+

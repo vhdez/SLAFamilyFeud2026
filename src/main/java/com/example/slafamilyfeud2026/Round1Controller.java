@@ -10,18 +10,18 @@ import javafx.scene.layout.GridPane;
 public class Round1Controller {
 
     public ImageView backgroundImage;
-    public Label	team1Score;
-    public Label	team2Score;
-    public Label	roundScore;
+    public Label team1Score;
+    public Label team2Score;
+    public Label roundScore;
     public GridPane Answers;
-    public Label    Answer1;
-    public Label	Answer2;
-    public Label	Answer3;
-    public Label	Answer4;
-    public Label	Answer5;
-    public Label	Answer6;
-    public Label	Answer7;
-    public Label	Answer8;
+    public Label Answer1;
+    public Label Answer2;
+    public Label Answer3;
+    public Label Answer4;
+    public Label Answer5;
+    public Label Answer6;
+    public Label Answer7;
+    public Label Answer8;
 
     private int team1score = 0;
     private int team2score = 0;
@@ -53,7 +53,7 @@ public class Round1Controller {
         }
     }
 
-    public void selectTeam(int newTeam) throws Exception{
+    public void selectTeam(int newTeam) throws Exception {
         currentTeam = newTeam;
         if (currentTeam == 0) {
 
@@ -78,7 +78,9 @@ public class Round1Controller {
 
     }
 
-    public void switchToRound2() throws Exception {
-
+    public void switchToRound2(KeyEvent event) throws Exception {
+        if (event.getCode() == KeyCode.SHIFT) {
+            FamilyFeudApp.Round2();
+        }
     }
 }
