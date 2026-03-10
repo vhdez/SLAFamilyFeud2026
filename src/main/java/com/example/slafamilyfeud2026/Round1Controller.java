@@ -55,14 +55,25 @@ public class Round1Controller {
         currentQuestion = Question.getAllTheQuestions().get(currentQuestionNum);
         System.out.println(Question.getAllTheQuestions().size() + " Questions Read");
         this.displayInstructions();
+        this.displayCurrentQuestionAnswers();
     }
 
     public void displayInstructions() {
         System.out.println("INSTRUCTIONS: Press key...");
-        System.out.println("     ANSWER keys: Key #1 - 8 to choose that answer");
-        System.out.println("     WRONG  keys: X for Wrong Answer; C to Close Wrong Answer");
-        System.out.println("     TEAM   keys: LEFT for Team 1; RIGHT for Team 2");
-        System.out.println("     ROUND  keys: SHIFT for Round 2");
+        System.out.println("     ANSWER   keys: Key #1 - 8 to choose that answer");
+        System.out.println("     WRONG    keys: X for Wrong Answer; C to Close Wrong Answer");
+        System.out.println("     QUESTION key : ENTER for Next Question; D for display Question/Answers");
+        System.out.println("     TEAM     keys: LEFT for Team 1; RIGHT for Team 2");
+        System.out.println("     ROUND    key : SHIFT for Round 2");
+    }
+
+    public void displayCurrentQuestionAnswers() {
+        System.out.println("QUESTION: " + currentQuestion.getTheQuestion());
+        int i = 1;
+        for (Answer answer : currentQuestion.getTheAnswers()) {
+            System.out.println("     ANSWER #" + i + " " + answer.getAnAnswer());
+            i = i + 1;
+        }
     }
 
     public void setupHandlers() {
@@ -83,6 +94,10 @@ public class Round1Controller {
         if (event.getCode() == KeyCode.ENTER) {
             nextQuestion();
             System.out.println("ACTION: Next Question displayed");
+            this.displayInstructions();
+            this.displayCurrentQuestionAnswers();
+        } else if (event.getCode() == KeyCode.D) {
+            displayCurrentQuestionAnswers();
         } else if (event.getCode() == KeyCode.LEFT) {
             selectTeam(1);
             System.out.println("ACTION: Select Team 1");
@@ -100,10 +115,9 @@ public class Round1Controller {
             System.out.println("ACTION: Close Wrong answer X");
         } else if (event.getCode() == KeyCode.H){
             this.displayInstructions();
-        }else {
+        } else {
             currentQuestion(event.getCode());
         }
-        pain.requestFocus();
     }
 
     public void selectTeam(int newTeam) throws Exception {
@@ -276,12 +290,6 @@ public class Round1Controller {
         XsCount = 0;
     }
 
-    public void switchToRound2(KeyEvent event) throws Exception {
-        if (event.getCode() == KeyCode.SHIFT) {
-            FamilyFeudApp.Round2();
-        }
-    }
-
     public void wrongAnswer() {
         if (XsCount < 3) {
             XsCount++;
@@ -296,11 +304,7 @@ public class Round1Controller {
     }
 
     public void playSound(String audioFilePath) throws Exception {
-
-
         //Media soundToPlay = new Media();
-
-
         System.out.println(audioFilePath);
 
         //Initialising the Media class
@@ -311,6 +315,5 @@ public class Round1Controller {
 
         //After setting this property to true, the audio will be played
         ourMediaPlayer.setAutoPlay(true);
-
     }
 }
