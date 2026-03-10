@@ -25,13 +25,13 @@ public class FamilyFeudApp extends Application {
     }
 
     public static void Round1() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("Round1View.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(FamilyFeudApp.class.getResource("Round1View.fxml"));
         Scene newScene = new Scene(fxmlLoader.load(), 500, 500);
         mainStage.setScene(newScene);
     }
 
     public static void Round2() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("Round2View.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(FamilyFeudApp.class.getResource("Round2View.fxml"));
         Scene newScene = new Scene(fxmlLoader.load(), 500, 500);
         mainStage.setScene(newScene);
     }
