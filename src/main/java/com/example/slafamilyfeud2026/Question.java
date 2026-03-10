@@ -2,6 +2,7 @@ package com.example.slafamilyfeud2026;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Question {
@@ -78,6 +79,7 @@ public class Question {
                 answers.add(newAnswer);
                 System.out.println(newAnswer);
             }
+            answers.sort(Comparator.comparing(Answer::getItsScore).reversed());
 
             Question newQuestion = new Question(currentQuestion,theQuestion,answers);
             System.out.println(newQuestion.toString());
