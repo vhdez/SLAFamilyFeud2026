@@ -12,6 +12,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+
+import java.net.URL;
 
 public class Round1Controller {
 
@@ -239,6 +244,25 @@ public class Round1Controller {
     }
 
     public void closeWrongAnswer() {
+
+    }
+
+    public void playSound(String audioFilePath) throws Exception {
+
+
+        //Media soundToPlay = new Media();
+
+
+        System.out.println(audioFilePath);
+
+        //Initialising the Media class
+        Media ourMedia = new Media(new URL(audioFilePath).toURI().toString());
+
+        //Initialising MediaPlayer class
+        MediaPlayer ourMediaPlayer = new MediaPlayer(ourMedia);
+
+        //After setting this property to true, the audio will be played
+        ourMediaPlayer.setAutoPlay(true);
 
     }
 }
