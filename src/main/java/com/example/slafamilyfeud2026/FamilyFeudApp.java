@@ -16,6 +16,10 @@ public class FamilyFeudApp extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
         stage.setTitle("Family Feud");
         stage.setScene(scene);
+
+        Round1Controller controller = fxmlLoader.getController();
+        controller.setupHandlers();
+
         stage.show();
         mainStage = stage;
     }
