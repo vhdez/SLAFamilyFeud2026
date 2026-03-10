@@ -79,10 +79,13 @@ public class Round1Controller {
             selectTeam(0);
         } else if (event.getCode() == KeyCode.UP) {
             selectTeam(3);
+        } else if (event.getCode() == KeyCode.SHIFT){
+            FamilyFeudApp.Round2();
         } else {
             currentQuestion(event.getCode());
         }
         pain.requestFocus();
+
     }
 
     public void selectTeam(int newTeam) throws Exception {
