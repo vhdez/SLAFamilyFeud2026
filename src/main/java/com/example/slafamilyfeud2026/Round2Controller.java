@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
-import java.sql.Array;
+import java.util.ArrayList;
 
 public class Round2Controller {
     public Label phaseLabel;
@@ -39,11 +39,11 @@ public class Round2Controller {
     Label[] answerLabels;
     Label[] scoreLabels;
 
+    @FXML
+    public void initialize() throws Exception {
+
+
+
+    }
 }
 
-@FXML
-public void initialize() throws Exception {
-
-
-
-}

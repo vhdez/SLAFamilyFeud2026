@@ -72,19 +72,19 @@ public class Question {
 
             ArrayList<Answer> answers = new ArrayList<>();
 
+            Question newQuestion = new Question(currentQuestion,theQuestion,answers);
+            //System.out.println("READ QUESTION: " + newQuestion.toString());
+
             while(lineScanner.hasNext()) {
                 Answer newAnswer = new Answer("",0,false);
                 newAnswer.setAnAnswer(lineScanner.next());
                 newAnswer.setItsScore(lineScanner.nextInt());
                 answers.add(newAnswer);
-                System.out.println(newAnswer);
+                //System.out.println("READ ANSWER: " + newAnswer);
             }
             answers.sort(Comparator.comparing(Answer::getItsScore).reversed());
 
-            Question newQuestion = new Question(currentQuestion,theQuestion,answers);
-            System.out.println(newQuestion.toString());
             allTheQuestions.add(newQuestion);
-
         }
     }
 }

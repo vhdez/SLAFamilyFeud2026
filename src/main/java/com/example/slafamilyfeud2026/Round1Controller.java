@@ -14,9 +14,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-
-
 import java.net.URL;
+import javafx.util.Subscription;
 
 public class Round1Controller {
 
@@ -54,7 +53,16 @@ public class Round1Controller {
     public void initialize() throws Exception {
         Question.readQuestions();
         currentQuestion = Question.getAllTheQuestions().get(currentQuestionNum);
-        System.out.println(currentQuestion.getTheQuestion());
+        System.out.println(Question.getAllTheQuestions().size() + " Questions Read");
+        this.displayInstructions();
+    }
+
+    public void displayInstructions() {
+        System.out.println("INSTRUCTIONS: Press key...");
+        System.out.println("     ANSWER keys: Key #1 - 8 to choose that answer");
+        System.out.println("     WRONG  keys: X for Wrong Answer; C to Close Wrong Answer");
+        System.out.println("     TEAM   keys: LEFT for Team 1; RIGHT for Team 2");
+        System.out.println("     ROUND  keys: SHIFT for Round 2");
     }
 
     public void setupHandlers() {
@@ -74,21 +82,28 @@ public class Round1Controller {
     public void processKeyEvent(KeyEvent event) throws Exception {
         if (event.getCode() == KeyCode.ENTER) {
             nextQuestion();
+            System.out.println("ACTION: Next Question displayed");
         } else if (event.getCode() == KeyCode.LEFT) {
             selectTeam(1);
+            System.out.println("ACTION: Select Team 1");
         } else if (event.getCode() == KeyCode.RIGHT) {
             selectTeam(2);
+            System.out.println("ACTION: Select Team 2");
         } else if (event.getCode() == KeyCode.SHIFT){
+            System.out.println("ACTION: Switch to Round 2");
             FamilyFeudApp.Round2();
         } else if (event.getCode() == KeyCode.X) {
             wrongAnswer();
+            System.out.println("ACTION: Wrong answer X");
         } else if (event.getCode() == KeyCode.C) {
             closeWrongAnswer();
+            System.out.println("ACTION: Close Wrong answer X");
+        } else if (event.getCode() == KeyCode.H){
+            this.displayInstructions();
         }else {
             currentQuestion(event.getCode());
         }
         pain.requestFocus();
-
     }
 
     public void selectTeam(int newTeam) throws Exception {
@@ -112,60 +127,93 @@ public class Round1Controller {
 
     public void currentQuestion(KeyCode keyCode) throws Exception {
         if (keyCode == KeyCode.DIGIT1) {
+            if (currentQuestion.getTheAnswers().size() < 1) {
+                return;
+            }
             if (!currentQuestion.getTheAnswers().get(0).getAnswered()) {
                 currentQuestion.getTheAnswers().get(0).setAnswered(true);
                 labelTransition(Answer1, currentQuestion.getTheAnswers().get(0).getAnAnswer());
                 labelTransition(score1, currentQuestion.getTheAnswers().get(0).getItsScore().toString());
                 currentRoundScore += currentQuestion.getTheAnswers().get(0).getItsScore();
+                System.out.println("ACTION: Answer 1 chosen");
             }
         } else if (keyCode == KeyCode.DIGIT2) {
+            if (currentQuestion.getTheAnswers().size() < 2) {
+                return;
+            }
             if (!currentQuestion.getTheAnswers().get(1).getAnswered()) {
                 currentQuestion.getTheAnswers().get(1).setAnswered(true);
                 labelTransition(Answer2, currentQuestion.getTheAnswers().get(1).getAnAnswer());
                 labelTransition(score2, currentQuestion.getTheAnswers().get(1).getItsScore().toString());
                 currentRoundScore += currentQuestion.getTheAnswers().get(1).getItsScore();
+                System.out.println("ACTION: Answer 2 chosen");
             }
         } else if (keyCode == KeyCode.DIGIT3) {
+            if (currentQuestion.getTheAnswers().size() < 3) {
+                return;
+            }
             if (!currentQuestion.getTheAnswers().get(2).getAnswered()) {
                 currentQuestion.getTheAnswers().get(2).setAnswered(true);
                 labelTransition(Answer3, currentQuestion.getTheAnswers().get(2).getAnAnswer());
                 labelTransition(score3, currentQuestion.getTheAnswers().get(2).getItsScore().toString());
                 currentRoundScore += currentQuestion.getTheAnswers().get(2).getItsScore();
+                System.out.println("ACTION: Answer 3 chosen");
             }
         } else if (keyCode == KeyCode.DIGIT4) {
+            if (currentQuestion.getTheAnswers().size() < 4) {
+                return;
+            }
             if (!currentQuestion.getTheAnswers().get(3).getAnswered()) {
                 currentQuestion.getTheAnswers().get(3).setAnswered(true);
                 labelTransition(Answer4, currentQuestion.getTheAnswers().get(3).getAnAnswer());
                 labelTransition(score4, currentQuestion.getTheAnswers().get(3).getItsScore().toString());
                 currentRoundScore += currentQuestion.getTheAnswers().get(3).getItsScore();
+                System.out.println("ACTION: Answer 4 chosen");
+
             }
         } else if (keyCode == KeyCode.DIGIT5) {
+            if (currentQuestion.getTheAnswers().size() < 5) {
+                return;
+            }
             if (!currentQuestion.getTheAnswers().get(4).getAnswered()) {
                 currentQuestion.getTheAnswers().get(4).setAnswered(true);
                 labelTransition(Answer5, currentQuestion.getTheAnswers().get(4).getAnAnswer());
                 labelTransition(score5, currentQuestion.getTheAnswers().get(4).getItsScore().toString());
                 currentRoundScore += currentQuestion.getTheAnswers().get(4).getItsScore();
+                System.out.println("ACTION: Answer 5 chosen");
             }
         } else if (keyCode == KeyCode.DIGIT6) {
+            if (currentQuestion.getTheAnswers().size() < 6) {
+            return;
+            }
             if (!currentQuestion.getTheAnswers().get(5).getAnswered()) {
                 currentQuestion.getTheAnswers().get(5).setAnswered(true);
                 labelTransition(Answer6, currentQuestion.getTheAnswers().get(5).getAnAnswer());
                 labelTransition(score6, currentQuestion.getTheAnswers().get(5).getItsScore().toString());
                 currentRoundScore += currentQuestion.getTheAnswers().get(5).getItsScore();
+                System.out.println("ACTION: Answer 6 chosen");
             }
         } else if (keyCode == KeyCode.DIGIT7) {
+            if (currentQuestion.getTheAnswers().size() < 7) {
+                return;
+            }
             if (!currentQuestion.getTheAnswers().get(6).getAnswered()) {
                 currentQuestion.getTheAnswers().get(6).setAnswered(true);
                 labelTransition(Answer7, currentQuestion.getTheAnswers().get(6).getAnAnswer());
                 labelTransition(score7, currentQuestion.getTheAnswers().get(6).getItsScore().toString());
                 currentRoundScore += currentQuestion.getTheAnswers().get(6).getItsScore();
+                System.out.println("ACTION: Answer 7 chosen");
             }
         } else if (keyCode == KeyCode.DIGIT8) {
+            if (currentQuestion.getTheAnswers().size() < 8) {
+                return;
+            }
             if (!currentQuestion.getTheAnswers().get(7).getAnswered()) {
                 currentQuestion.getTheAnswers().get(7).setAnswered(true);
                 labelTransition(Answer8, currentQuestion.getTheAnswers().get(7).getAnAnswer());
                 labelTransition(score8, currentQuestion.getTheAnswers().get(7).getItsScore().toString());
                 currentRoundScore += currentQuestion.getTheAnswers().get(7).getItsScore();
+                System.out.println("ACTION: Answer 8 chosen");
             }
         }
         roundScore.setText("Round: " + currentRoundScore);
