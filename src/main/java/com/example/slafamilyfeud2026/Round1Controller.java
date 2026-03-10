@@ -17,9 +17,9 @@ public class Round1Controller {
 
     public AnchorPane pain;
     public ImageView backgroundImage;
-    public Label	team1Score;
-    public Label	team2Score;
-    public Label	roundScore;
+    public Label team1Score;
+    public Label team2Score;
+    public Label roundScore;
     public GridPane Answers;
     public Label    Answer1;
     public Label	Answer2;
@@ -47,7 +47,13 @@ public class Round1Controller {
     private Question currentQuestion;
 
     public void initialize() throws Exception {
-        Scene scene = pain.getScene();
+        Question.readQuestions();
+        currentQuestion = Question.getAllTheQuestions().get(currentQuestionNum);
+        System.out.println(currentQuestion.getTheQuestion());
+    }
+
+    public void setupHandlers() {
+        Scene scene = pain.getScene();;
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
@@ -58,9 +64,6 @@ public class Round1Controller {
                 }
             }
         });
-        Question.readQuestions();
-        currentQuestion = Question.getAllTheQuestions().get(currentQuestionNum);
-        System.out.println(currentQuestion.getTheQuestion());
     }
 
     public void processKeyEvent(KeyEvent event) throws Exception {
@@ -76,13 +79,16 @@ public class Round1Controller {
             selectTeam(0);
         } else if (event.getCode() == KeyCode.UP) {
             selectTeam(3);
+        } else if (event.getCode() == KeyCode.SHIFT){
+            FamilyFeudApp.Round2();
         } else {
             currentQuestion(event.getCode());
         }
         pain.requestFocus();
+
     }
 
-    public void selectTeam(int newTeam) throws Exception{
+    public void selectTeam(int newTeam) throws Exception {
         currentTeam = newTeam;
         if (currentTeam == 0) {
             team1Score.setStyle(
@@ -123,37 +129,37 @@ public class Round1Controller {
             }
         } else if (keyCode == KeyCode.DIGIT2) {
             if (!currentQuestion.getTheAnswers().get(1).getAnswered()) {
-                labelTransition(Answer1, currentQuestion.getTheAnswers().get(1).getAnAnswer());
+                labelTransition(Answer2, currentQuestion.getTheAnswers().get(1).getAnAnswer());
                 currentRoundScore += currentQuestion.getTheAnswers().get(1).getItsScore();
             }
         } else if (keyCode == KeyCode.DIGIT3) {
             if (!currentQuestion.getTheAnswers().get(2).getAnswered()) {
-                labelTransition(Answer1, currentQuestion.getTheAnswers().get(2).getAnAnswer());
+                labelTransition(Answer3, currentQuestion.getTheAnswers().get(2).getAnAnswer());
                 currentRoundScore += currentQuestion.getTheAnswers().get(2).getItsScore();
             }
         } else if (keyCode == KeyCode.DIGIT4) {
             if (!currentQuestion.getTheAnswers().get(3).getAnswered()) {
-                labelTransition(Answer1, currentQuestion.getTheAnswers().get(3).getAnAnswer());
+                labelTransition(Answer4, currentQuestion.getTheAnswers().get(3).getAnAnswer());
                 currentRoundScore += currentQuestion.getTheAnswers().get(3).getItsScore();
             }
         } else if (keyCode == KeyCode.DIGIT5) {
             if (!currentQuestion.getTheAnswers().get(4).getAnswered()) {
-                labelTransition(Answer1, currentQuestion.getTheAnswers().get(4).getAnAnswer());
+                labelTransition(Answer5, currentQuestion.getTheAnswers().get(4).getAnAnswer());
                 currentRoundScore += currentQuestion.getTheAnswers().get(4).getItsScore();
             }
         } else if (keyCode == KeyCode.DIGIT6) {
             if (!currentQuestion.getTheAnswers().get(5).getAnswered()) {
-                labelTransition(Answer1, currentQuestion.getTheAnswers().get(5).getAnAnswer());
+                labelTransition(Answer6, currentQuestion.getTheAnswers().get(5).getAnAnswer());
                 currentRoundScore += currentQuestion.getTheAnswers().get(5).getItsScore();
             }
         } else if (keyCode == KeyCode.DIGIT7) {
             if (!currentQuestion.getTheAnswers().get(6).getAnswered()) {
-                labelTransition(Answer1, currentQuestion.getTheAnswers().get(6).getAnAnswer());
+                labelTransition(Answer7, currentQuestion.getTheAnswers().get(6).getAnAnswer());
                 currentRoundScore += currentQuestion.getTheAnswers().get(6).getItsScore();
             }
         } else if (keyCode == KeyCode.DIGIT8) {
             if (!currentQuestion.getTheAnswers().get(7).getAnswered()) {
-                labelTransition(Answer1, currentQuestion.getTheAnswers().get(7).getAnAnswer());
+                labelTransition(Answer8, currentQuestion.getTheAnswers().get(7).getAnAnswer());
                 currentRoundScore += currentQuestion.getTheAnswers().get(7).getItsScore();
             }
         }
@@ -190,7 +196,9 @@ public class Round1Controller {
 
     }
 
-    public void switchToRound2() throws Exception {
-
+    public void switchToRound2(KeyEvent event) throws Exception {
+        if (event.getCode() == KeyCode.SHIFT) {
+            FamilyFeudApp.Round2();
+        }
     }
 }
