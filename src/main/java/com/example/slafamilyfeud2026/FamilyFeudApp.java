@@ -18,23 +18,21 @@ public class FamilyFeudApp extends Application {
         stage.setScene(scene);
         Round1Controller controller = fxmlLoader.getController();
         controller.setupHandlers();
-      stage.setFullScreen(true);
+        stage.setFullScreen(true);
         stage.show();
         mainStage = stage;
     }
 
     public static void Round1() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(FamilyFeudApp.class.getResource("Round1View.fxml"));
-        Scene newScene = new Scene(fxmlLoader.load(), 800, 600);
-        mainStage.setScene(newScene);
+        mainStage.getScene().setRoot(fxmlLoader.load());
         mainStage.setFullScreen(true);
     }
 
     public static void Round2() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(FamilyFeudApp.class.getResource("Round2View.fxml"));
-        Scene newScene = new Scene(fxmlLoader.load(), 800, 600);
         Round2Controller controller = fxmlLoader.getController();
-        mainStage.setScene(newScene);
+        mainStage.getScene().setRoot(fxmlLoader.load());
         mainStage.setFullScreen(true);
         controller.setupHandlers();
     }
