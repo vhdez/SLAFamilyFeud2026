@@ -143,11 +143,6 @@ public class Round2Controller {
             return;
         }
 
-        if (answerIndex != currentQuestionIndex) {
-            System.out.println("  [!] Current question is #" + (currentQuestionIndex + 1) + ". Press " + (currentQuestionIndex + 1) + " to answer it.");
-            return;
-        }
-
         Question q = round2Questions.get(currentQuestionIndex);
 
         if (currentPhase == 1) {
