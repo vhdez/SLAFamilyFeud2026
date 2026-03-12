@@ -33,7 +33,9 @@ public class FamilyFeudApp extends Application {
     public static void Round2() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(FamilyFeudApp.class.getResource("Round2View.fxml"));
         Scene newScene = new Scene(fxmlLoader.load(), 800, 600);
+        Round2Controller controller = fxmlLoader.getController();
         mainStage.setScene(newScene);
+        controller.setupHandlers();
     }
 }
 

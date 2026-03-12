@@ -16,6 +16,9 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.net.URL;
 import javafx.util.Subscription;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.nio.file.Paths;
 
 public class Round1Controller {
 
@@ -260,52 +263,14 @@ public class Round1Controller {
         currentQuestionNum++;
         if (currentQuestionNum < Question.getAllTheQuestions().size()) {
             currentQuestion = Question.getAllTheQuestions().get(currentQuestionNum);
-            int numAnswers = currentQuestion.getTheAnswers().size();
-            if (numAnswers == 8) {
-                Answer1.setText(String.valueOf(1));
-                Answer2.setText(String.valueOf(2));
-                Answer3.setText(String.valueOf(3));
-                Answer4.setText(String.valueOf(4));
-                Answer5.setText(String.valueOf(5));
-                Answer6.setText(String.valueOf(6));
-                Answer7.setText(String.valueOf(7));
-                Answer8.setText(String.valueOf(8));
-            } else if (numAnswers == 7) {
-                Answer1.setText(String.valueOf(1));
-                Answer2.setText(String.valueOf(2));
-                Answer3.setText(String.valueOf(3));
-                Answer4.setText(String.valueOf(4));
-                Answer5.setText(String.valueOf(5));
-                Answer6.setText(String.valueOf(6));
-                Answer7.setText(String.valueOf(7));
-            } else if (numAnswers == 6) {
-                Answer1.setText(String.valueOf(1));
-                Answer2.setText(String.valueOf(2));
-                Answer3.setText(String.valueOf(3));
-                Answer4.setText(String.valueOf(4));
-                Answer5.setText(String.valueOf(5));
-                Answer6.setText(String.valueOf(6));
-            } else if (numAnswers == 5) {
-                Answer1.setText(String.valueOf(1));
-                Answer2.setText(String.valueOf(2));
-                Answer3.setText(String.valueOf(3));
-                Answer4.setText(String.valueOf(4));
-                Answer5.setText(String.valueOf(5));
-            } else if (numAnswers == 4) {
-                Answer1.setText(String.valueOf(1));
-                Answer2.setText(String.valueOf(2));
-                Answer3.setText(String.valueOf(3));
-                Answer4.setText(String.valueOf(4));
-            } else if (numAnswers == 3) {
-                Answer1.setText(String.valueOf(1));
-                Answer2.setText(String.valueOf(2));
-                Answer3.setText(String.valueOf(3));
-            } else if (numAnswers == 2) {
-                Answer1.setText(String.valueOf(1));
-                Answer2.setText(String.valueOf(2));
-            } else {
-                Answer1.setText(String.valueOf(1));
-            }
+            Answer1.setText(String.valueOf(1));
+            Answer2.setText(String.valueOf(2));
+            Answer3.setText(String.valueOf(3));
+            Answer4.setText(String.valueOf(4));
+            Answer5.setText(String.valueOf(5));
+            Answer6.setText(String.valueOf(6));
+            Answer7.setText(String.valueOf(7));
+            Answer8.setText(String.valueOf(8));
             score1.setText("");
             score2.setText("");
             score3.setText("");
@@ -345,7 +310,27 @@ public class Round1Controller {
                 x3.setVisible(true);
             }
         } else {
+        if (XsCount >= 3) {
             XsCount = 0;
+        }
+
+        XsCount++;
+        System.out.println("  X #" + XsCount);
+
+
+        try {
+            String soundPath = Paths.get("src/wrong-answer-sound-effect.mp3").toUri().toString();
+            Media sound = new Media(soundPath);
+            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.play();
+        } catch (Exception e) {
+            System.out.println("Could not play sound: " + e.getMessage());
+        }
+
+        if (XsCount == 3) {
+            System.out.println("\n 3 STRIKES! STEAL ATTEMPT ");
+            System.out.println("  Press [S] if steal is CORRECT");
+            System.out.println("  Press [C] if steal is WRONG");
         }
     }
 
