@@ -27,6 +27,8 @@ public class FamilyFeudApp extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(FamilyFeudApp.class.getResource("Round1View.fxml"));
         mainStage.getScene().setRoot(fxmlLoader.load());
         mainStage.setFullScreen(true);
+        Round1Controller controller = fxmlLoader.getController();
+        controller.setupHandlers();
     }
 
     public static void Round2() throws IOException {
