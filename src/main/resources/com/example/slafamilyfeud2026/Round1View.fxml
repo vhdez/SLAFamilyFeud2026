@@ -41,7 +41,7 @@
          <font>
             <Font name="Times New Roman" size="50.0" />
          </font></Label>
-        <Label fx:id="score1" alignment="CENTER" prefHeight="70.0" prefWidth="100" style="-fx-border-color: black; -fx-border-width: 1;" text="50" GridPane.columnIndex="1" GridPane.rowIndex="0">
+        <Label fx:id="score1" alignment="CENTER" prefHeight="70.0" prefWidth="100" style="-fx-border-color: black; -fx-border-width: 1;" GridPane.columnIndex="1" GridPane.rowIndex="0">
          <font>
             <Font name="Times New Roman" size="50.0" />
          </font></Label>
