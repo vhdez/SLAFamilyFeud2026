@@ -9,12 +9,14 @@ public class Question {
     private int questionNumber;
     private String theQuestion;
     private ArrayList<Answer> theAnswers;
+    private Boolean beenAskedAlready;
     static ArrayList<Question> allTheQuestions;
 
     public Question(int questionNumber, String theQuestion, ArrayList<Answer> theAnswers) {
         this.questionNumber = questionNumber;
         this.theQuestion = theQuestion;
         this.theAnswers = theAnswers;
+        this.beenAskedAlready = false;
     }
 
     public int getQuestionNumber() {
@@ -39,6 +41,14 @@ public class Question {
 
     public void setTheAnswers(ArrayList<Answer> theAnswers) {
         this.theAnswers = theAnswers;
+    }
+
+    public Boolean getBeenAskedAlready() {
+        return beenAskedAlready;
+    }
+
+    public void setBeenAskedAlready(Boolean beenAskedAlready) {
+        this.beenAskedAlready = beenAskedAlready;
     }
 
     public static ArrayList<Question> getAllTheQuestions() {
