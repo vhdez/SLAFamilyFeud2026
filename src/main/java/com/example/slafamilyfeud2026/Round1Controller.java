@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -14,6 +15,9 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.net.URL;
 import javafx.util.Subscription;
 import javafx.scene.media.Media;
@@ -54,10 +58,23 @@ public class Round1Controller {
     private int currentTeam = 0;
     private int currentRoundScore = 0;
     private int XsCount = 0;
+    private boolean stealRound = false;
     private int currentQuestionNum = 0;
     private Question currentQuestion;
 
     public void initialize() throws Exception {
+        File x1File = new File("src/FamilyFeudX.png");
+        FileInputStream img1Input = new FileInputStream(x1File);
+        Image x1Image = new Image(img1Input);
+        x1.setImage(x1Image);
+        File x2File = new File("src/FamilyFeudX(2).png");
+        FileInputStream img2Input = new FileInputStream(x2File);
+        Image x2Image = new Image(img2Input);
+        x2.setImage(x2Image);
+        File x3File = new File("src/FamilyFeudX3.png");
+        FileInputStream img3Input = new FileInputStream(x3File);
+        Image x3Image = new Image(img3Input);
+        x3.setImage(x3Image);
         Question.readQuestions();
         currentQuestion = Question.getAllTheQuestions().get(currentQuestionNum);
         System.out.println(Question.getAllTheQuestions().size() + " Questions Read");
@@ -239,7 +256,7 @@ public class Round1Controller {
                 System.out.print(" 8 ");
             }
         }
-        roundScore.setText("Round: " + currentRoundScore);
+        roundScore.setText(String.valueOf(currentRoundScore));
     }
 
     public void labelTransition(Label label, String answer) {
@@ -280,15 +297,7 @@ public class Round1Controller {
             score7.setText("");
             score8.setText("");
         }
-        if (currentTeam == 1) {
-            team1score += currentRoundScore;
-        } else if (currentTeam == 2) {
-            team2score += currentRoundScore;
-        }
-        currentRoundScore = 0;
-        team1Score.setText("Team 1: " + team1score);
-        team2Score.setText("Team 2: " + team2score);
-        roundScore.setText("Round: " + currentRoundScore);
+        rewardPoint();
         currentTeam = 0;
         team1Score.setStyle(
                 "-fx-border-color: black;"
@@ -299,8 +308,19 @@ public class Round1Controller {
         XsCount = 0;
     }
 
-    public void wrongAnswer() {
-        if (XsCount < 3) {
+    public void wrongAnswer() throws Exception {
+        if (stealRound) {
+            XsCount++;
+            if (XsCount == 1) {
+                if (currentTeam == 1) {
+                    selectTeam(2);
+                } else {
+                    selectTeam(1);
+                }
+
+                rewardPoint();
+            }
+        } else {
             XsCount++;
             if (XsCount == 1) {
                 x1.setVisible(true);
@@ -308,30 +328,30 @@ public class Round1Controller {
                 x2.setVisible(true);
             } else {
                 x3.setVisible(true);
-            }
-        } else {
-            if (XsCount >= 3) {
                 XsCount = 0;
+                stealRound = true;
+                if (currentTeam == 1) {
+                    selectTeam(2);
+                } else {
+                    selectTeam(1);
+                }
             }
 
-            XsCount++;
             System.out.println("  X #" + XsCount);
-
-
-            try {
-                String soundPath = Paths.get("src/wrong-answer-sound-effect.mp3").toUri().toString();
-                Media sound = new Media(soundPath);
-                MediaPlayer mediaPlayer = new MediaPlayer(sound);
-                mediaPlayer.play();
-            } catch (Exception e) {
-                System.out.println("Could not play sound: " + e.getMessage());
-            }
 
             if (XsCount == 3) {
                 System.out.println("\n 3 STRIKES! STEAL ATTEMPT ");
                 System.out.println("  Press [S] if steal is CORRECT");
                 System.out.println("  Press [C] if steal is WRONG");
             }
+        }
+        try {
+            String soundPath = Paths.get("src/wrong-answer-sound-effect.mp3").toUri().toString();
+            Media sound = new Media(soundPath);
+            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.play();
+        } catch (Exception e) {
+            System.out.println("Could not play sound: " + e.getMessage());
         }
     }
 
@@ -353,5 +373,17 @@ public class Round1Controller {
 
         //After setting this property to true, the audio will be played
         ourMediaPlayer.setAutoPlay(true);
+    }
+
+    public void rewardPoint() {
+        if (currentTeam == 1) {
+            team1score += currentRoundScore;
+        } else if (currentTeam == 2) {
+            team2score += currentRoundScore;
+        }
+        currentRoundScore = 0;
+        team1Score.setText(String.valueOf(team1score));
+        team2Score.setText(String.valueOf(team2score));
+        roundScore.setText(String.valueOf(currentRoundScore));
     }
 }

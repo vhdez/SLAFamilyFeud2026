@@ -3,6 +3,7 @@ module com.example.slafamilyfeud2026 {
     requires javafx.fxml;
     requires java.desktop;
     requires javafx.media;
+    requires javafx.graphics;
 
 
     opens com.example.slafamilyfeud2026 to javafx.fxml;
