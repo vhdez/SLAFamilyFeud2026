@@ -19,7 +19,7 @@ public class FamilyFeudApp extends Application {
         mainStage.setScene(scene);
         Round1Controller controller = fxmlLoader.getController();
         controller.setupHandlers();
-        //mainStage.setFullScreen(true);
+        mainStage.setFullScreen(true);
         mainStage.show();
     }
 
@@ -29,7 +29,7 @@ public class FamilyFeudApp extends Application {
         mainStage.setScene(scene);
         Round1Controller controller1 = fxmlLoader.getController();
         controller1.setupHandlers();
-        //mainStage.setFullScreen(true);
+        mainStage.setFullScreen(true);
         mainStage.show();
     }
 
@@ -39,7 +39,7 @@ public class FamilyFeudApp extends Application {
         mainStage.setScene(scene);
         Round2Controller controller2 = fxmlLoader.getController();
         controller2.setupHandlers();
-        //mainStage.setFullScreen(true);
+        mainStage.setFullScreen(true);
         mainStage.show();
     }
 }

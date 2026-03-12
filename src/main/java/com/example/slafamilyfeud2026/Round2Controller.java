@@ -7,6 +7,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Round2Controller {
 
@@ -46,8 +47,16 @@ public class Round2Controller {
         Question.readQuestions();
 
         ArrayList<Question> all = Question.getAllTheQuestions();
+        int nextQuestionNumber = 0;
+        while (Question.getAllTheQuestions().get(nextQuestionNumber).getBeenAskedAlready()) {
+            nextQuestionNumber = nextQuestionNumber + 1;
+        }
+        if (nextQuestionNumber + 5 > all.size()) {
+            System.out.println("  [!] Round 2 does not have 5 unused questions available!");
+            return;
+        }
         round2Questions = new ArrayList<>();
-        for (int i = 0; i < Math.min(5, all.size()); i++) {
+        for (int i = nextQuestionNumber; i < nextQuestionNumber + 5; i++) {
             round2Questions.add(all.get(i));
         }
 
@@ -80,14 +89,16 @@ public class Round2Controller {
     }
 
     public void displayInstructions() {
-        System.out.println("INSTRUCTIONS: Press key...");
-        System.out.println("     ANSWER   keys: Key #1 - 5 to choose that ranked answer");
+        System.out.println("Round 2 INSTRUCTIONS: Press key...");
+        System.out.println("     ANSWER   keys: 1 - 8 for correct answer; W for wrong answer (then type it)");
         System.out.println("     QUESTION key : ENTER to advance / reveal; D to display question");
-        System.out.println("     ROUND    key : SHIFT for Round 1");
+        System.out.println("     ROUND    key : SHIFT back to Round 1");
     }
 
     public void displayCurrentQuestion() {
-        if (currentPhase != 1 && currentPhase != 3) return;
+        if (currentPhase == 2 || currentPhase == 4 || currentPhase == 5) {
+            return;
+        }
         if (currentQuestionIndex >= round2Questions.size()) return;
         currentQuestion = round2Questions.get(currentQuestionIndex);
         System.out.println("QUESTION: " + currentQuestion.getTheQuestion());
@@ -116,38 +127,60 @@ public class Round2Controller {
     }
 
     public void handleAnswerKey(KeyCode key) {
-        int rankIndex = keyToIndex(key);
-        if (rankIndex == -1) return;
-        if (currentPhase != 1 && currentPhase != 3) return;
-        if (currentQuestionIndex >= round2Questions.size()) return;
+        if (currentPhase == 2 || currentPhase == 3 || currentPhase == 4) {
+            return;
+        }
 
-        if (rankIndex >= round2Questions.size()) {
+        if (currentQuestionIndex >= round2Questions.size()) {
             System.out.println("  [!] Only " + round2Questions.size() + " questions loaded.");
             return;
         }
 
-        Question q = round2Questions.get(currentQuestionIndex);
-
-        if (rankIndex >= q.getTheAnswers().size()) {
-            System.out.println("  [!] That answer rank doesn't exist for this question.");
+        if (key == KeyCode.W) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Type wrong answer: ");
+            String wrongAnswer = scanner.nextLine();
+            scanner.close();
+            if (currentPhase == 1) {
+                player1Answers[currentQuestionIndex] = wrongAnswer;
+                player1Scores[currentQuestionIndex] = 0;
+                p1AnswerLabels[currentQuestionIndex].setText(wrongAnswer);
+                p1ScoreLabels[currentQuestionIndex].setText("?");
+            } else if (currentPhase == 3) {
+                player2Answers[currentQuestionIndex] = wrongAnswer;
+                player2Scores[currentQuestionIndex] = 0;
+                p2AnswerLabels[currentQuestionIndex].setText(wrongAnswer);
+                p2ScoreLabels[currentQuestionIndex].setText("?");
+            }
+            System.out.print(" WRONG ");
             return;
-        }
+        } else {
 
-        Answer chosen = q.getTheAnswers().get(rankIndex);
+            int answerIndex = keyToIndex(key);
+            if (answerIndex == -1) {
+                return;
+            }
+            Question q = round2Questions.get(currentQuestionIndex);
 
-        if (currentPhase == 1) {
-            player1Answers[currentQuestionIndex] = chosen.getAnAnswer();
-            player1Scores[currentQuestionIndex]  = chosen.getItsScore();
-            p1AnswerLabels[currentQuestionIndex].setText(chosen.getAnAnswer());
-            p1ScoreLabels[currentQuestionIndex].setText("?");
-            System.out.print(" " + (rankIndex + 1) + " ");
+            if (answerIndex >= q.getTheAnswers().size()) {
+                System.out.println("  [!] Answer #" + answerIndex + " doesn't exist for this question.");
+                return;
+            }
+            Answer chosen = q.getTheAnswers().get(answerIndex);
 
-        } else if (currentPhase == 3) {
-            player2Answers[currentQuestionIndex] = chosen.getAnAnswer();
-            player2Scores[currentQuestionIndex]  = chosen.getItsScore();
-            p2AnswerLabels[currentQuestionIndex].setText(chosen.getAnAnswer());
-            p2ScoreLabels[currentQuestionIndex].setText("?");
-            System.out.print(" " + (rankIndex + 1) + " ");
+            if (currentPhase == 1) {
+                player1Answers[currentQuestionIndex] = chosen.getAnAnswer();
+                player1Scores[currentQuestionIndex] = chosen.getItsScore();
+                p1AnswerLabels[currentQuestionIndex].setText(chosen.getAnAnswer());
+                p1ScoreLabels[currentQuestionIndex].setText("?");
+                System.out.print(" " + (answerIndex + 1) + " ");
+            } else if (currentPhase == 3) {
+                player2Answers[currentQuestionIndex] = chosen.getAnAnswer();
+                player2Scores[currentQuestionIndex] = chosen.getItsScore();
+                p2AnswerLabels[currentQuestionIndex].setText(chosen.getAnAnswer());
+                p2ScoreLabels[currentQuestionIndex].setText("?");
+                System.out.print(" " + (answerIndex + 1) + " ");
+            }
         }
 
         currentQuestionIndex++;
@@ -251,6 +284,9 @@ public class Round2Controller {
             case DIGIT3 -> 2;
             case DIGIT4 -> 3;
             case DIGIT5 -> 4;
+            case DIGIT6 -> 5;
+            case DIGIT7 -> 6;
+            case DIGIT8 -> 7;
             default -> -1;
         };
     }
