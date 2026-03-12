@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="pain" onKeyPressed="#processKeyEvent" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.slafamilyfeud2026.Round1Controller">
 
@@ -23,57 +24,89 @@
     </HBox>
 
 
-    <GridPane fx:id="answersGrid" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="80">
+    <GridPane fx:id="answersGrid" layoutX="138.0" layoutY="167.0" AnchorPane.leftAnchor="138.0" AnchorPane.topAnchor="167.0">
 
         <columnConstraints>
-            <ColumnConstraints prefWidth="30" />
-            <ColumnConstraints prefWidth="370" />
-            <ColumnConstraints prefWidth="100" />
+            <ColumnConstraints prefWidth="230.0" />
+            <ColumnConstraints prefWidth="60.0" />
+         <ColumnConstraints minWidth="10.0" prefWidth="230.0" />
+         <ColumnConstraints minWidth="10.0" prefWidth="60.0" />
         </columnConstraints>
 
         <rowConstraints>
-            <RowConstraints prefHeight="50" />
-            <RowConstraints prefHeight="50" />
-            <RowConstraints prefHeight="50" />
-            <RowConstraints prefHeight="50" />
-            <RowConstraints prefHeight="50" />
-            <RowConstraints prefHeight="50" />
-            <RowConstraints prefHeight="50" />
-            <RowConstraints prefHeight="50" />
+            <RowConstraints prefHeight="70.0" />
+            <RowConstraints prefHeight="70.0" />
+            <RowConstraints prefHeight="70.0" />
+            <RowConstraints prefHeight="70.0" />
         </rowConstraints>
-
-        <Label alignment="CENTER" prefHeight="50" prefWidth="30" style="-fx-border-color: black; -fx-border-width: 1;" text="1" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <Label fx:id="Answer1" alignment="CENTER" prefHeight="50" prefWidth="370" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <Label fx:id="score1" alignment="CENTER" prefHeight="50" prefWidth="100" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-
-        <Label alignment="CENTER" prefHeight="50" prefWidth="30" style="-fx-border-color: black; -fx-border-width: 1;" text="2" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <Label fx:id="Answer2" alignment="CENTER" prefHeight="50" prefWidth="370" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Label fx:id="score2" alignment="CENTER" prefHeight="50" prefWidth="100" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-
-        <Label alignment="CENTER" prefHeight="50" prefWidth="30" style="-fx-border-color: black; -fx-border-width: 1;" text="3" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <Label fx:id="Answer3" alignment="CENTER" prefHeight="50" prefWidth="370" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <Label fx:id="score3" alignment="CENTER" prefHeight="50" prefWidth="100" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-
-        <Label alignment="CENTER" prefHeight="50" prefWidth="30" style="-fx-border-color: black; -fx-border-width: 1;" text="4" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-        <Label fx:id="Answer4" alignment="CENTER" prefHeight="50" prefWidth="370" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        <Label fx:id="score4" alignment="CENTER" prefHeight="50" prefWidth="100" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-
-        <Label alignment="CENTER" prefHeight="50" prefWidth="30" style="-fx-border-color: black; -fx-border-width: 1;" text="5" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-        <Label fx:id="Answer5" alignment="CENTER" prefHeight="50" prefWidth="370" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-        <Label fx:id="score5" alignment="CENTER" prefHeight="50" prefWidth="100" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-
-        <Label alignment="CENTER" prefHeight="50" prefWidth="30" style="-fx-border-color: black; -fx-border-width: 1;" text="6" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-        <Label fx:id="Answer6" alignment="CENTER" prefHeight="50" prefWidth="370" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-        <Label fx:id="score6" alignment="CENTER" prefHeight="50" prefWidth="100" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-
-        <Label alignment="CENTER" prefHeight="50" prefWidth="30" style="-fx-border-color: black; -fx-border-width: 1;" text="7" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-        <Label fx:id="Answer7" alignment="CENTER" prefHeight="50" prefWidth="370" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-        <Label fx:id="score7" alignment="CENTER" prefHeight="50" prefWidth="100" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-
-        <Label alignment="CENTER" prefHeight="50" prefWidth="30" style="-fx-border-color: black; -fx-border-width: 1;" text="8" GridPane.columnIndex="0" GridPane.rowIndex="7" />
-        <Label fx:id="Answer8" alignment="CENTER" prefHeight="50" prefWidth="370" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-        <Label fx:id="score8" alignment="CENTER" prefHeight="50" prefWidth="100" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+        <Label fx:id="Answer1" alignment="CENTER" prefHeight="70.0" prefWidth="370" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.rowIndex="0">
+         <font>
+            <Font name="Times New Roman" size="50.0" />
+         </font></Label>
+        <Label fx:id="score1" alignment="CENTER" prefHeight="70.0" prefWidth="100" style="-fx-border-color: black; -fx-border-width: 1;" text="50" GridPane.columnIndex="1" GridPane.rowIndex="0">
+         <font>
+            <Font name="Times New Roman" size="50.0" />
+         </font></Label>
+        <Label fx:id="Answer2" alignment="CENTER" prefHeight="70.0" prefWidth="370" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.rowIndex="1">
+         <font>
+            <Font name="Times New Roman" size="50.0" />
+         </font></Label>
+        <Label fx:id="score2" alignment="CENTER" prefHeight="70.0" prefWidth="100" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <font>
+            <Font name="Times New Roman" size="50.0" />
+         </font></Label>
+        <Label fx:id="Answer3" alignment="CENTER" prefHeight="70.0" prefWidth="370" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.rowIndex="2">
+         <font>
+            <Font name="Times New Roman" size="50.0" />
+         </font></Label>
+        <Label fx:id="score3" alignment="CENTER" prefHeight="70.0" prefWidth="100" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <font>
+            <Font name="Times New Roman" size="50.0" />
+         </font></Label>
+        <Label fx:id="Answer4" alignment="CENTER" prefHeight="70.0" prefWidth="370" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.rowIndex="3">
+         <font>
+            <Font name="Times New Roman" size="50.0" />
+         </font></Label>
+        <Label fx:id="score4" alignment="CENTER" prefHeight="70.0" prefWidth="100" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <font>
+            <Font name="Times New Roman" size="50.0" />
+         </font></Label>
+        <Label fx:id="Answer5" alignment="CENTER" prefHeight="70.0" prefWidth="370" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="2">
+         <font>
+            <Font name="Times New Roman" size="50.0" />
+         </font></Label>
+        <Label fx:id="score5" alignment="CENTER" prefHeight="70.0" prefWidth="100" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="3">
+         <font>
+            <Font name="Times New Roman" size="50.0" />
+         </font></Label>
+        <Label fx:id="Answer6" alignment="CENTER" prefHeight="70.0" prefWidth="370" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <font>
+            <Font name="Times New Roman" size="50.0" />
+         </font></Label>
+        <Label fx:id="score6" alignment="CENTER" prefHeight="70.0" prefWidth="100" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="3" GridPane.rowIndex="1">
+         <font>
+            <Font name="Times New Roman" size="50.0" />
+         </font></Label>
+        <Label fx:id="Answer7" alignment="CENTER" prefHeight="70.0" prefWidth="370" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <font>
+            <Font name="Times New Roman" size="50.0" />
+         </font></Label>
+        <Label fx:id="score7" alignment="CENTER" prefHeight="70.0" prefWidth="100" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="3" GridPane.rowIndex="2">
+         <font>
+            <Font name="Times New Roman" size="50.0" />
+         </font></Label>
+        <Label fx:id="Answer8" alignment="CENTER" prefHeight="70.0" prefWidth="370" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="2" GridPane.rowIndex="3">
+         <font>
+            <Font name="Times New Roman" size="50.0" />
+         </font></Label>
+        <Label fx:id="score8" alignment="CENTER" prefHeight="70.0" prefWidth="100" style="-fx-border-color: black; -fx-border-width: 1;" text="" GridPane.columnIndex="3" GridPane.rowIndex="3">
+         <font>
+            <Font name="Times New Roman" size="50.0" />
+         </font></Label>
 
     </GridPane>
+   <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="300.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" fx:id="x1" />
+   <ImageView fitHeight="200.0" fitWidth="450.0" layoutX="175.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" fx:id="x2" />
+   <ImageView fitHeight="200.0" fitWidth="700.0" layoutX="50.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" fx:id="x3" />
 
 </AnchorPane>
