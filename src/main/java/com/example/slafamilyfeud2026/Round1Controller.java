@@ -310,27 +310,28 @@ public class Round1Controller {
                 x3.setVisible(true);
             }
         } else {
-        if (XsCount >= 3) {
-            XsCount = 0;
-        }
+            if (XsCount >= 3) {
+                XsCount = 0;
+            }
 
-        XsCount++;
-        System.out.println("  X #" + XsCount);
+            XsCount++;
+            System.out.println("  X #" + XsCount);
 
 
-        try {
-            String soundPath = Paths.get("src/wrong-answer-sound-effect.mp3").toUri().toString();
-            Media sound = new Media(soundPath);
-            MediaPlayer mediaPlayer = new MediaPlayer(sound);
-            mediaPlayer.play();
-        } catch (Exception e) {
-            System.out.println("Could not play sound: " + e.getMessage());
-        }
+            try {
+                String soundPath = Paths.get("src/wrong-answer-sound-effect.mp3").toUri().toString();
+                Media sound = new Media(soundPath);
+                MediaPlayer mediaPlayer = new MediaPlayer(sound);
+                mediaPlayer.play();
+            } catch (Exception e) {
+                System.out.println("Could not play sound: " + e.getMessage());
+            }
 
-        if (XsCount == 3) {
-            System.out.println("\n 3 STRIKES! STEAL ATTEMPT ");
-            System.out.println("  Press [S] if steal is CORRECT");
-            System.out.println("  Press [C] if steal is WRONG");
+            if (XsCount == 3) {
+                System.out.println("\n 3 STRIKES! STEAL ATTEMPT ");
+                System.out.println("  Press [S] if steal is CORRECT");
+                System.out.println("  Press [C] if steal is WRONG");
+            }
         }
     }
 
