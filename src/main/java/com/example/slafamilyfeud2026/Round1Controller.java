@@ -176,6 +176,7 @@ public class Round1Controller {
                 labelTransition(score1, currentQuestion.getTheAnswers().get(0).getItsScore().toString());
                 currentRoundScore += currentQuestion.getTheAnswers().get(0).getItsScore();
                 System.out.print(" 1 ");
+                playSound("src/correct-answer-ff.mp3");
             }
         } else if (keyCode == KeyCode.DIGIT2) {
             if (currentQuestion.getTheAnswers().size() < 2) {
@@ -187,6 +188,7 @@ public class Round1Controller {
                 labelTransition(score2, currentQuestion.getTheAnswers().get(1).getItsScore().toString());
                 currentRoundScore += currentQuestion.getTheAnswers().get(1).getItsScore();
                 System.out.print(" 2 ");
+                playSound("src/correct-answer-ff.mp3");
             }
         } else if (keyCode == KeyCode.DIGIT3) {
             if (currentQuestion.getTheAnswers().size() < 3) {
@@ -198,6 +200,7 @@ public class Round1Controller {
                 labelTransition(score3, currentQuestion.getTheAnswers().get(2).getItsScore().toString());
                 currentRoundScore += currentQuestion.getTheAnswers().get(2).getItsScore();
                 System.out.print(" 3 ");
+                playSound("src/correct-answer-ff.mp3");
             }
         } else if (keyCode == KeyCode.DIGIT4) {
             if (currentQuestion.getTheAnswers().size() < 4) {
@@ -209,7 +212,7 @@ public class Round1Controller {
                 labelTransition(score4, currentQuestion.getTheAnswers().get(3).getItsScore().toString());
                 currentRoundScore += currentQuestion.getTheAnswers().get(3).getItsScore();
                 System.out.print(" 4 ");
-
+                playSound("src/correct-answer-ff.mp3");
             }
         } else if (keyCode == KeyCode.DIGIT5) {
             if (currentQuestion.getTheAnswers().size() < 5) {
@@ -221,6 +224,7 @@ public class Round1Controller {
                 labelTransition(score5, currentQuestion.getTheAnswers().get(4).getItsScore().toString());
                 currentRoundScore += currentQuestion.getTheAnswers().get(4).getItsScore();
                 System.out.print(" 5 ");
+                playSound("src/correct-answer-ff.mp3");
             }
         } else if (keyCode == KeyCode.DIGIT6) {
             if (currentQuestion.getTheAnswers().size() < 6) {
@@ -232,6 +236,7 @@ public class Round1Controller {
                 labelTransition(score6, currentQuestion.getTheAnswers().get(5).getItsScore().toString());
                 currentRoundScore += currentQuestion.getTheAnswers().get(5).getItsScore();
                 System.out.print(" 6 ");
+                playSound("src/correct-answer-ff.mp3");
             }
         } else if (keyCode == KeyCode.DIGIT7) {
             if (currentQuestion.getTheAnswers().size() < 7) {
@@ -243,6 +248,7 @@ public class Round1Controller {
                 labelTransition(score7, currentQuestion.getTheAnswers().get(6).getItsScore().toString());
                 currentRoundScore += currentQuestion.getTheAnswers().get(6).getItsScore();
                 System.out.print(" 7 ");
+                playSound("src/correct-answer-ff.mp3");
             }
         } else if (keyCode == KeyCode.DIGIT8) {
             if (currentQuestion.getTheAnswers().size() < 8) {
@@ -254,6 +260,7 @@ public class Round1Controller {
                 labelTransition(score8, currentQuestion.getTheAnswers().get(7).getItsScore().toString());
                 currentRoundScore += currentQuestion.getTheAnswers().get(7).getItsScore();
                 System.out.print(" 8 ");
+                playSound("src/correct-answer-ff.mp3");
             }
         }
         roundScore.setText(String.valueOf(currentRoundScore));
@@ -306,12 +313,14 @@ public class Round1Controller {
                 "-fx-border-color: black;"
         );
         XsCount = 0;
+        stealRound = false;
     }
 
     public void wrongAnswer() throws Exception {
         if (stealRound) {
             XsCount++;
             if (XsCount == 1) {
+                x1.setVisible(true);
                 if (currentTeam == 1) {
                     selectTeam(2);
                 } else {
@@ -345,14 +354,7 @@ public class Round1Controller {
                 System.out.println("  Press [C] if steal is WRONG");
             }
         }
-        try {
-            String soundPath = Paths.get("src/wrong-answer-sound-effect.mp3").toUri().toString();
-            Media sound = new Media(soundPath);
-            MediaPlayer mediaPlayer = new MediaPlayer(sound);
-            mediaPlayer.play();
-        } catch (Exception e) {
-            System.out.println("Could not play sound: " + e.getMessage());
-        }
+        playSound("src/wrong-answer-sound-effect.mp3");
     }
 
     public void closeWrongAnswer() {
@@ -362,17 +364,14 @@ public class Round1Controller {
     }
 
     public void playSound(String audioFilePath) throws Exception {
-        //Media soundToPlay = new Media();
-        System.out.println(audioFilePath);
-
-        //Initialising the Media class
-        Media ourMedia = new Media(new URL(audioFilePath).toURI().toString());
-
-        //Initialising MediaPlayer class
-        MediaPlayer ourMediaPlayer = new MediaPlayer(ourMedia);
-
-        //After setting this property to true, the audio will be played
-        ourMediaPlayer.setAutoPlay(true);
+        try {
+            String soundPath = Paths.get(audioFilePath).toUri().toString();
+            Media sound = new Media(soundPath);
+            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.play();
+        } catch (Exception e) {
+            System.out.println("Could not play sound: " + e.getMessage());
+        }
     }
 
     public void rewardPoint() {
