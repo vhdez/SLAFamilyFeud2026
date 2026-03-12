@@ -16,6 +16,9 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.net.URL;
 import javafx.util.Subscription;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.nio.file.Paths;
 
 public class Round1Controller {
 
@@ -293,11 +296,28 @@ public class Round1Controller {
     }
 
     public void wrongAnswer() {
-        if (XsCount < 3) {
-            XsCount++;
-            // reveal Xs onscreen
-        } else {
+        if (XsCount >= 3) {
             XsCount = 0;
+            return;
+        }
+
+        XsCount++;
+        System.out.println("  X #" + XsCount);
+
+
+        try {
+            String soundPath = Paths.get("src/wrong-answer-sound-effect.mp3").toUri().toString();
+            Media sound = new Media(soundPath);
+            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.play();
+        } catch (Exception e) {
+            System.out.println("Could not play sound: " + e.getMessage());
+        }
+
+        if (XsCount == 3) {
+            System.out.println("\n 3 STRIKES! STEAL ATTEMPT ");
+            System.out.println("  Press [S] if steal is CORRECT");
+            System.out.println("  Press [C] if steal is WRONG");
         }
     }
 
