@@ -21,6 +21,10 @@ public class Round1Controller {
 
     public AnchorPane pain;
     public ImageView backgroundImage;
+    public ImageView x1;
+    public ImageView x2;
+    public ImageView x3;
+
     public Label team1Score;
     public Label team2Score;
     public Label roundScore;
@@ -256,14 +260,52 @@ public class Round1Controller {
         currentQuestionNum++;
         if (currentQuestionNum < Question.getAllTheQuestions().size()) {
             currentQuestion = Question.getAllTheQuestions().get(currentQuestionNum);
-            Answer1.setText(String.valueOf(1));
-            Answer2.setText(String.valueOf(2));
-            Answer3.setText(String.valueOf(3));
-            Answer4.setText(String.valueOf(4));
-            Answer5.setText(String.valueOf(5));
-            Answer6.setText(String.valueOf(6));
-            Answer7.setText(String.valueOf(7));
-            Answer8.setText(String.valueOf(8));
+            int numAnswers = currentQuestion.getTheAnswers().size();
+            if (numAnswers == 8) {
+                Answer1.setText(String.valueOf(1));
+                Answer2.setText(String.valueOf(2));
+                Answer3.setText(String.valueOf(3));
+                Answer4.setText(String.valueOf(4));
+                Answer5.setText(String.valueOf(5));
+                Answer6.setText(String.valueOf(6));
+                Answer7.setText(String.valueOf(7));
+                Answer8.setText(String.valueOf(8));
+            } else if (numAnswers == 7) {
+                Answer1.setText(String.valueOf(1));
+                Answer2.setText(String.valueOf(2));
+                Answer3.setText(String.valueOf(3));
+                Answer4.setText(String.valueOf(4));
+                Answer5.setText(String.valueOf(5));
+                Answer6.setText(String.valueOf(6));
+                Answer7.setText(String.valueOf(7));
+            } else if (numAnswers == 6) {
+                Answer1.setText(String.valueOf(1));
+                Answer2.setText(String.valueOf(2));
+                Answer3.setText(String.valueOf(3));
+                Answer4.setText(String.valueOf(4));
+                Answer5.setText(String.valueOf(5));
+                Answer6.setText(String.valueOf(6));
+            } else if (numAnswers == 5) {
+                Answer1.setText(String.valueOf(1));
+                Answer2.setText(String.valueOf(2));
+                Answer3.setText(String.valueOf(3));
+                Answer4.setText(String.valueOf(4));
+                Answer5.setText(String.valueOf(5));
+            } else if (numAnswers == 4) {
+                Answer1.setText(String.valueOf(1));
+                Answer2.setText(String.valueOf(2));
+                Answer3.setText(String.valueOf(3));
+                Answer4.setText(String.valueOf(4));
+            } else if (numAnswers == 3) {
+                Answer1.setText(String.valueOf(1));
+                Answer2.setText(String.valueOf(2));
+                Answer3.setText(String.valueOf(3));
+            } else if (numAnswers == 2) {
+                Answer1.setText(String.valueOf(1));
+                Answer2.setText(String.valueOf(2));
+            } else {
+                Answer1.setText(String.valueOf(1));
+            }
             score1.setText("");
             score2.setText("");
             score3.setText("");
@@ -295,14 +337,22 @@ public class Round1Controller {
     public void wrongAnswer() {
         if (XsCount < 3) {
             XsCount++;
-            // reveal Xs onscreen
+            if (XsCount == 1) {
+                x1.setVisible(true);
+            } else if (XsCount == 2) {
+                x2.setVisible(true);
+            } else {
+                x3.setVisible(true);
+            }
         } else {
             XsCount = 0;
         }
     }
 
     public void closeWrongAnswer() {
-
+        x1.setVisible(false);
+        x2.setVisible(false);
+        x3.setVisible(false);
     }
 
     public void playSound(String audioFilePath) throws Exception {
