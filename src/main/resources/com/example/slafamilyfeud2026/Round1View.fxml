@@ -15,8 +15,6 @@
 
     <HBox prefWidth="800" spacing="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="20">
 
-        <Label fx:id="team1Score" alignment="CENTER" prefHeight="40" prefWidth="250" style="-fx-border-color: black; -fx-border-width: 1;" text="Team 1: 0" />
-
         <Label fx:id="roundScore" alignment="CENTER" prefHeight="40" prefWidth="300" style="-fx-border-color: black; -fx-border-width: 1;" text="Round: 0" />
 
         <Label fx:id="team2Score" alignment="CENTER" prefHeight="40" prefWidth="250" style="-fx-border-color: black; -fx-border-width: 1;" text="Team 2: 0" />
@@ -24,7 +22,7 @@
     </HBox>
 
 
-    <GridPane fx:id="answersGrid" layoutX="138.0" layoutY="167.0" AnchorPane.leftAnchor="138.0" AnchorPane.topAnchor="167.0">
+    <GridPane fx:id="answersGrid" layoutX="100.0" layoutY="167.0" AnchorPane.leftAnchor="138.0" AnchorPane.topAnchor="167.0">
 
         <columnConstraints>
             <ColumnConstraints prefWidth="230.0" />
@@ -43,7 +41,7 @@
          <font>
             <Font name="Times New Roman" size="50.0" />
          </font></Label>
-        <Label fx:id="score1" alignment="CENTER" prefHeight="70.0" prefWidth="100" style="-fx-border-color: black; -fx-border-width: 1;" text="50" GridPane.columnIndex="1" GridPane.rowIndex="0">
+        <Label fx:id="score1" alignment="CENTER" prefHeight="70.0" prefWidth="100" style="-fx-border-color: black; -fx-border-width: 1;" GridPane.columnIndex="1" GridPane.rowIndex="0">
          <font>
             <Font name="Times New Roman" size="50.0" />
          </font></Label>
@@ -105,8 +103,10 @@
          </font></Label>
 
     </GridPane>
-   <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="300.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" fx:id="x1" />
-   <ImageView fitHeight="200.0" fitWidth="450.0" layoutX="175.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" fx:id="x2" />
-   <ImageView fitHeight="200.0" fitWidth="700.0" layoutX="50.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" fx:id="x3" />
+   <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="300.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" visible="false" fx:id="x1" />
+   <ImageView fitHeight="200.0" fitWidth="450.0" layoutX="175.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" visible="false" fx:id="x2" />
+   <ImageView fitHeight="200.0" fitWidth="700.0" layoutX="50.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" visible="false" fx:id="x3" />
+
+     <Label fx:id="team1Score" alignment="CENTER" layoutX="-23.0" layoutY="284.0" prefHeight="40" prefWidth="250" style="-fx-border-color: black; -fx-border-width: 1;" text="Team 1: 0" />
 
 </AnchorPane>
