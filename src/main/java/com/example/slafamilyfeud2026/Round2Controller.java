@@ -153,7 +153,6 @@ public class Round2Controller {
                 p2ScoreLabels[currentQuestionIndex].setText("?");
             }
             System.out.print(" WRONG ");
-            return;
         } else {
 
             int answerIndex = keyToIndex(key);
