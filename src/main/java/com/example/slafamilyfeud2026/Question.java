@@ -69,6 +69,7 @@ public class Question {
             lineScanner.useDelimiter("\t");
             currentQuestion+=1;
             String theQuestion = lineScanner.next();
+            //System.out.println("Question READ: " + theQuestion);
 
             ArrayList<Answer> answers = new ArrayList<>();
 
@@ -77,8 +78,12 @@ public class Question {
 
             while(lineScanner.hasNext()) {
                 Answer newAnswer = new Answer("",0,false);
-                newAnswer.setAnAnswer(lineScanner.next());
-                newAnswer.setItsScore(lineScanner.nextInt());
+                String answer = lineScanner.next();
+                //System.out.println("Answer READ: " + answer);
+                newAnswer.setAnAnswer(answer);
+                Integer score = lineScanner.nextInt();
+                //System.out.println("Score READ: " + score);
+                newAnswer.setItsScore(score);
                 answers.add(newAnswer);
                 //System.out.println("READ ANSWER: " + newAnswer);
             }
