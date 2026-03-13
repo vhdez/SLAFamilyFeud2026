@@ -59,7 +59,7 @@ public class Round1Controller {
     private int currentRoundScore = 0;
     private int XsCount = 0;
     private boolean stealRound = false;
-    private int currentQuestionNum = 0;
+    private int currentQuestionNum = -1;
     private Question currentQuestion;
 
     public void initialize() throws Exception {
@@ -151,17 +151,17 @@ public class Round1Controller {
         currentTeam = newTeam;
         if (currentTeam == 1) {
             team1Score.setStyle(
-                    "-fx-border-color: blue;"
+                    "-fx-background-color: lightblue;" + "-fx-background-radius: 15px;"
             );
             team2Score.setStyle(
-                    "-fx-border-color: black;"
+                    "-fx-border-color: blue;" + "-fx-background-radius: 15px;"
             );
         } else if (currentTeam == 2) {
             team1Score.setStyle(
-                    "-fx-border-color: black;"
+                    "-fx-background-color: blue;" + "-fx-background-radius: 15px;"
             );
             team2Score.setStyle(
-                    "-fx-border-color: blue;"
+                    "-fx-background-color: lightblue;" + "-fx-background-radius: 15px;"
             );
         }
     }
@@ -332,10 +332,10 @@ public class Round1Controller {
         rewardPoint();
         currentTeam = 0;
         team1Score.setStyle(
-                "-fx-border-color: black;"
+                "-fx-background-color: blue;" + "-fx-background-radius: 15px;"
         );
         team2Score.setStyle(
-                "-fx-border-color: black;"
+                "-fx-background-color: blue;" + "-fx-background-radius: 15px;"
         );
         XsCount = 0;
         stealRound = false;
