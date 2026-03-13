@@ -12,29 +12,35 @@ public class FamilyFeudApp extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        mainStage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(FamilyFeudApp.class.getResource("Round1View.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
-        stage.setTitle("Family Feud");
-        stage.setScene(scene);
+        mainStage.setTitle("Family Feud");
+        mainStage.setScene(scene);
         Round1Controller controller = fxmlLoader.getController();
         controller.setupHandlers();
-        stage.setFullScreen(true);
-        stage.show();
-        mainStage = stage;
+        mainStage.setFullScreen(true);
+        mainStage.show();
     }
 
     public static void Round1() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(FamilyFeudApp.class.getResource("Round1View.fxml"));
-        mainStage.getScene().setRoot(fxmlLoader.load());
+        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+        mainStage.setScene(scene);
+        Round1Controller controller1 = fxmlLoader.getController();
+        controller1.setupHandlers();
         mainStage.setFullScreen(true);
+        mainStage.show();
     }
 
     public static void Round2() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(FamilyFeudApp.class.getResource("Round2View.fxml"));
-        Round2Controller controller = fxmlLoader.getController();
-        mainStage.getScene().setRoot(fxmlLoader.load());
+        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+        mainStage.setScene(scene);
+        Round2Controller controller2 = fxmlLoader.getController();
+        controller2.setupHandlers();
         mainStage.setFullScreen(true);
-        controller.setupHandlers();
+        mainStage.show();
     }
 }
 
