@@ -132,7 +132,7 @@ public class Round2Controller {
     }
 
     public void handleAnswerKey(KeyCode key) {
-        if (currentPhase == 2 || currentPhase == 3 || currentPhase == 4) {
+        if (currentPhase == 2 || currentPhase == 4) {
             return;
         }
 
