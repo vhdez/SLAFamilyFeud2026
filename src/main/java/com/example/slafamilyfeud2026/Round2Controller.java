@@ -2,10 +2,14 @@ package com.example.slafamilyfeud2026;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,6 +18,7 @@ public class Round2Controller {
     public AnchorPane pain;
     public Label totalScoreLabel;
     public Label phaseLabel;
+    public ImageView backgroundImage;
 
     public Label answer1, answer2, answer3, answer4, answer5;
     public Label answer6, answer7, answer8, answer9, answer10;
@@ -45,7 +50,7 @@ public class Round2Controller {
     @FXML
     public void initialize() throws Exception {
         Question.readQuestions();
-
+        backgroundImage.setImage(new Image(new FileInputStream("src/round2BG.png")));
         ArrayList<Question> all = Question.getAllTheQuestions();
         int nextQuestionNumber = 0;
         while (Question.getAllTheQuestions().get(nextQuestionNumber).getBeenAskedAlready()) {
