@@ -63,6 +63,7 @@ public class Round1Controller {
     private Question currentQuestion;
 
     public void initialize() throws Exception {
+        backgroundImage.setImage(new Image(new FileInputStream("src/round1BG.png")));
         File x1File = new File("src/FamilyFeudX.png");
         FileInputStream img1Input = new FileInputStream(x1File);
         Image x1Image = new Image(img1Input);
