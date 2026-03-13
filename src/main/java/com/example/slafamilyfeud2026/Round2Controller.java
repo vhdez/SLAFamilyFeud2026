@@ -11,10 +11,10 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Round2Controller {
-
     public AnchorPane pain;
     public Label totalScoreLabel;
     public Label phaseLabel;
@@ -25,12 +25,9 @@ public class Round2Controller {
     public Label score1, score2, score3, score4, score5;
     public Label score6, score7, score8, score9, score10;
 
-    Integer playerTurn;
     Question currentQuestion;
     ArrayList<Integer> selectedAnswers;
     ArrayList<Question> round2Questions;
-    Label[] answerLabels;
-    Label[] scoreLabels;
 
     private String[] player1Answers;
     private String[] player2Answers;
@@ -88,7 +85,7 @@ public class Round2Controller {
             try {
                 processKeyEvent(event);
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                System.out.println(e);
             }
         });
     }
@@ -142,10 +139,16 @@ public class Round2Controller {
         }
 
         if (key == KeyCode.W) {
+            System.out.print(" WRONG ");
             Scanner scanner = new Scanner(System.in);
             System.out.print("Type wrong answer: ");
-            String wrongAnswer = scanner.nextLine();
-            scanner.close();
+            String wrongAnswer = null;
+            try {
+                wrongAnswer = scanner.nextLine();
+            } catch (NoSuchElementException ex) {
+                System.out.println("Read extra line");
+                wrongAnswer = scanner.nextLine();
+            }
             if (currentPhase == 1) {
                 player1Answers[currentQuestionIndex] = wrongAnswer;
                 player1Scores[currentQuestionIndex] = 0;
@@ -157,9 +160,7 @@ public class Round2Controller {
                 p2AnswerLabels[currentQuestionIndex].setText(wrongAnswer);
                 p2ScoreLabels[currentQuestionIndex].setText("?");
             }
-            System.out.print(" WRONG ");
         } else {
-
             int answerIndex = keyToIndex(key);
             if (answerIndex == -1) {
                 return;

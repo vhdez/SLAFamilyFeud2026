@@ -111,7 +111,7 @@ public class Round1Controller {
                 try {
                     processKeyEvent(keyEvent);
                 } catch (Exception e) {
-                    throw new RuntimeException(e);
+                    System.out.println(e);
                 }
             }
         });
