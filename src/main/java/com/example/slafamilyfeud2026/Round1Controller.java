@@ -154,7 +154,7 @@ public class Round1Controller {
                     "-fx-background-color: lightblue;" + "-fx-background-radius: 15px;"
             );
             team2Score.setStyle(
-                    "-fx-border-color: blue;" + "-fx-background-radius: 15px;"
+                    "-fx-backgroiund-color: blue;" + "-fx-background-radius: 15px;"
             );
         } else if (currentTeam == 2) {
             team1Score.setStyle(
