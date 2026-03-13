@@ -77,7 +77,7 @@ public class Round1Controller {
         Image x3Image = new Image(img3Input);
         x3.setImage(x3Image);
         Question.readQuestions();
-        currentQuestion = Question.getAllTheQuestions().get(currentQuestionNum);
+        this.nextQuestion();
         System.out.println(Question.getAllTheQuestions().size() + " Questions Read");
         this.displayInstructions();
         this.displayCurrentQuestionAnswers();
@@ -286,24 +286,48 @@ public class Round1Controller {
 
     public void nextQuestion() throws Exception {
         currentQuestionNum++;
+        Answer1.setText("");
+        Answer2.setText("");
+        Answer3.setText("");
+        Answer4.setText("");
+        Answer5.setText("");
+        Answer6.setText("");
+        Answer7.setText("");
+        Answer8.setText("");
+        score1.setText("");
+        score2.setText("");
+        score3.setText("");
+        score4.setText("");
+        score5.setText("");
+        score6.setText("");
+        score7.setText("");
+        score8.setText("");
         if (currentQuestionNum < Question.getAllTheQuestions().size()) {
             currentQuestion = Question.getAllTheQuestions().get(currentQuestionNum);
-            Answer1.setText(String.valueOf(1));
-            Answer2.setText(String.valueOf(2));
-            Answer3.setText(String.valueOf(3));
-            Answer4.setText(String.valueOf(4));
-            Answer5.setText(String.valueOf(5));
-            Answer6.setText(String.valueOf(6));
-            Answer7.setText(String.valueOf(7));
-            Answer8.setText(String.valueOf(8));
-            score1.setText("");
-            score2.setText("");
-            score3.setText("");
-            score4.setText("");
-            score5.setText("");
-            score6.setText("");
-            score7.setText("");
-            score8.setText("");
+            if (currentQuestion.getTheAnswers().size() >= 1) {
+                Answer1.setText(String.valueOf(1));
+            }
+            if (currentQuestion.getTheAnswers().size() >= 2) {
+                Answer2.setText(String.valueOf(2));
+            }
+            if (currentQuestion.getTheAnswers().size() >= 3) {
+                Answer3.setText(String.valueOf(3));
+            }
+            if (currentQuestion.getTheAnswers().size() >= 4) {
+                Answer4.setText(String.valueOf(4));
+            }
+            if (currentQuestion.getTheAnswers().size() >= 5) {
+                Answer5.setText(String.valueOf(5));
+            }
+            if (currentQuestion.getTheAnswers().size() >= 6) {
+                Answer6.setText(String.valueOf(6));
+            }
+            if (currentQuestion.getTheAnswers().size() >= 7) {
+                Answer7.setText(String.valueOf(7));
+            }
+            if (currentQuestion.getTheAnswers().size() >= 8) {
+                Answer8.setText(String.valueOf(8));
+            }
         }
         rewardPoint();
         currentTeam = 0;
