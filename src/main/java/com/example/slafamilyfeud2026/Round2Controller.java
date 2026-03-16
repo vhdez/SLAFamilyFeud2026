@@ -148,16 +148,10 @@ public class Round2Controller {
         }
 
         if (key == KeyCode.W) {
-            System.out.print(" WRONG ");
             Scanner scanner = new Scanner(System.in);
             System.out.print("Type wrong answer: ");
-            String wrongAnswer = null;
-            try {
-                wrongAnswer = scanner.nextLine();
-            } catch (NoSuchElementException ex) {
-                System.out.println("Read extra line");
-                wrongAnswer = scanner.nextLine();
-            }
+            String wrongAnswer = scanner.nextLine();
+            scanner.close();
             if (currentPhase == 1) {
                 player1Answers[currentQuestionIndex] = wrongAnswer;
                 player1Scores[currentQuestionIndex] = 0;
@@ -169,17 +163,18 @@ public class Round2Controller {
                 p2AnswerLabels[currentQuestionIndex].setText(wrongAnswer);
                 p2ScoreLabels[currentQuestionIndex].setText("?");
             }
+            System.out.print(" WRONG ");
         } else {
             int answerIndex = keyToIndex(key);
-            if (answerIndex == -1) {
-                return;
-            }
+            if (answerIndex == -1) return;
+
             Question q = round2Questions.get(currentQuestionIndex);
 
             if (answerIndex >= q.getTheAnswers().size()) {
-                System.out.println("  [!] Answer #" + answerIndex + " doesn't exist for this question.");
+                System.out.println("  [!] Answer #" + (answerIndex + 1) + " doesn't exist for this question.");
                 return;
             }
+
             Answer chosen = q.getTheAnswers().get(answerIndex);
 
             if (currentPhase == 1) {
@@ -197,68 +192,58 @@ public class Round2Controller {
             }
         }
 
-        currentQuestionIndex++;
-
-        if (currentQuestionIndex < round2Questions.size()) {
-            displayCurrentQuestion();
-        } else {
-            if (currentPhase == 1) {
-                System.out.println("\n  Player 1 done! Press ENTER to reveal answers.");
-            } else if (currentPhase == 3) {
-                System.out.println("\n  Player 2 done! Press ENTER to reveal answers.");
-            }
-        }
+        System.out.println("  Press ENTER to reveal score.");
     }
 
     public void handleEnter() {
-        if (currentPhase == 1) {
-            if (currentQuestionIndex < round2Questions.size()) {
-                System.out.println("  Player 1 still has " + (round2Questions.size() - currentQuestionIndex) + " question(s) left.");
+        if (currentPhase == 1 || currentPhase == 3) {
+            if (currentQuestionIndex >= round2Questions.size()) {
+                if (currentPhase == 1) {
+                    currentPhase = 2;
+                    currentQuestionIndex = 0;
+                    System.out.println("\n=== PLAYER 2's TURN ===");
+                    displayInstructions();
+                    displayCurrentQuestion();
+                } else {
+                    currentPhase = 5;
+                    System.out.println("\n=== ROUND COMPLETE === Final Total: " + totalScore);
+                    System.out.println("  Press ENTER to reset.");
+                }
                 return;
             }
-            currentPhase = 2;
-            revealIndex = 0;
-            System.out.println("\n=== REVEALING PLAYER 1 === Press ENTER for each answer.");
 
-        } else if (currentPhase == 2) {
-            if (revealIndex < round2Questions.size()) {
-                int score = player1Scores[revealIndex];
-                p1ScoreLabels[revealIndex].setText(String.valueOf(score));
-                totalScore += score;
-                totalScoreLabel.setText("Total: " + totalScore);
-                System.out.println("  P1 Q" + (revealIndex + 1) + ": " + player1Answers[revealIndex] + " = " + score + " pts | Total: " + totalScore);
-                revealIndex++;
-            }
-            if (revealIndex == round2Questions.size()) {
-                currentPhase = 3;
-                currentQuestionIndex = 0;
-                System.out.println("\n=== PLAYER 2's TURN ===");
-                displayInstructions();
-                displayCurrentQuestion();
-            }
-
-        } else if (currentPhase == 3) {
-            if (currentQuestionIndex < round2Questions.size()) {
-                System.out.println("  Player 2 still has " + (round2Questions.size() - currentQuestionIndex) + " question(s) left.");
-                return;
-            }
-            currentPhase = 4;
-            revealIndex = 0;
-            System.out.println("\n=== REVEALING PLAYER 2 === Press ENTER for each answer.");
-
-        } else if (currentPhase == 4) {
-            if (revealIndex < round2Questions.size()) {
-                int score = player2Scores[revealIndex];
-                p2ScoreLabels[revealIndex].setText(String.valueOf(score));
-                totalScore += score;
-                totalScoreLabel.setText("Total: " + totalScore);
-                System.out.println("  P2 Q" + (revealIndex + 1) + ": " + player2Answers[revealIndex] + " = " + score + " pts | Total: " + totalScore);
-                revealIndex++;
-            }
-            if (revealIndex == round2Questions.size()) {
-                currentPhase = 5;
-                System.out.println("\n=== ROUND COMPLETE === Final Total: " + totalScore);
-                System.out.println("  Press ENTER to reset.");
+            if (currentPhase == 1) {
+                if (p1ScoreLabels[currentQuestionIndex].getText().equals("?")) {
+                    int score = player1Scores[currentQuestionIndex];
+                    p1ScoreLabels[currentQuestionIndex].setText(String.valueOf(score));
+                    totalScore += score;
+                    totalScoreLabel.setText("Total: " + totalScore);
+                    System.out.println("  Revealed: " + player1Answers[currentQuestionIndex] + " = " + score + " pts | Total: " + totalScore);
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex < round2Questions.size()) {
+                        displayCurrentQuestion();
+                    } else {
+                        System.out.println("\n  Player 1 done! Press ENTER to start Player 2.");
+                    }
+                } else {
+                    System.out.println("  [!] Answer this question first with a number key.");
+                }
+            } else if (currentPhase == 3) {
+                if (p2ScoreLabels[currentQuestionIndex].getText().equals("?")) {
+                    int score = player2Scores[currentQuestionIndex];
+                    p2ScoreLabels[currentQuestionIndex].setText(String.valueOf(score));
+                    totalScore += score;
+                    totalScoreLabel.setText("Total: " + totalScore);
+                    System.out.println("  Revealed: " + player2Answers[currentQuestionIndex] + " = " + score + " pts | Total: " + totalScore);
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex < round2Questions.size()) {
+                        displayCurrentQuestion();
+                    } else {
+                        System.out.println("\n  Player 2 done! Press ENTER to finish.");
+                    }
+                } else {
+                    System.out.println("  [!] Answer this question first with a number key.");
+                }
             }
 
         } else if (currentPhase == 5) {
