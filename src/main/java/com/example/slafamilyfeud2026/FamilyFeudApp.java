@@ -3,6 +3,7 @@ package com.example.slafamilyfeud2026;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class FamilyFeudApp extends Application {
         Round1Controller controller = fxmlLoader.getController();
         controller.setupHandlers();
         mainStage.setFullScreen(true);
+        mainStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         mainStage.show();
     }
 
@@ -29,6 +31,7 @@ public class FamilyFeudApp extends Application {
         mainStage.setFullScreen(true);
         Round1Controller controller1 = fxmlLoader.getController();
         controller1.setupHandlers();
+     mainStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         mainStage.show();
     }
 
@@ -38,6 +41,7 @@ public class FamilyFeudApp extends Application {
         mainStage.setFullScreen(true);
         Round2Controller controller2 = fxmlLoader.getController();
         controller2.setupHandlers();
+        mainStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         mainStage.show();
     }
 }

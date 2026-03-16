@@ -1,6 +1,6 @@
 package com.example.slafamilyfeud2026;
 
-public class Answer {
+public class    Answer {
     private String anAnswer;
     private Integer itsScore;
     private Boolean answered;

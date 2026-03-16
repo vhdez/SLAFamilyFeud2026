@@ -1,8 +1,13 @@
 package com.example.slafamilyfeud2026;
 
 import javafx.animation.ScaleTransition;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.DoubleBinding;
+import javafx.beans.binding.NumberBinding;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -11,6 +16,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.media.Media;
@@ -27,6 +34,7 @@ import java.nio.file.Paths;
 public class Round1Controller {
 
     public AnchorPane pain;
+    public StackPane stackPane;
     public ImageView backgroundImage;
     public ImageView x1;
     public ImageView x2;
@@ -63,6 +71,18 @@ public class Round1Controller {
     private Question currentQuestion;
 
     public void initialize() throws Exception {
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds(); // Gets screen size accounting for taskbars
+
+// Assuming 'root' is your main, outer layout pane
+// And 'content' is the inner pane with a fixed initial size (e.g., 1920x1080)
+        pain.setPrefSize(800, 600);
+
+        NumberBinding scaleBinding = Bindings.min(stackPane.widthProperty().divide(800), stackPane.heightProperty().divide(600));
+        stackPane.scaleXProperty().bind(scaleBinding);
+        stackPane.scaleYProperty().bind(scaleBinding);
+
+
         backgroundImage.setImage(new Image(new FileInputStream("src/round1BG.png")));
         File x1File = new File("src/FamilyFeudX.png");
         FileInputStream img1Input = new FileInputStream(x1File);

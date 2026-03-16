@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -7,115 +8,139 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pain" onKeyPressed="#processKeyEvent" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.slafamilyfeud2026.Round1Controller">
-
-    <ImageView fx:id="backgroundImage" fitHeight="600" fitWidth="800" preserveRatio="false" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
-
-    <HBox prefWidth="800" spacing="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="20" />
-
-
-    <GridPane fx:id="answersGrid" layoutX="110.0" layoutY="188.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="188.0">
-
-        <columnConstraints>
-            <ColumnConstraints prefWidth="230.0" />
-            <ColumnConstraints prefWidth="60.0" />
-         <ColumnConstraints minWidth="10.0" prefWidth="230.0" />
-         <ColumnConstraints minWidth="10.0" prefWidth="60.0" />
-        </columnConstraints>
-
-        <rowConstraints>
-            <RowConstraints prefHeight="70.0" />
-            <RowConstraints prefHeight="70.0" />
-            <RowConstraints prefHeight="70.0" />
-            <RowConstraints prefHeight="70.0" />
-        </rowConstraints>
-        <Label fx:id="Answer1" alignment="CENTER" prefHeight="70.0" prefWidth="370" text="" textFill="WHITE" GridPane.rowIndex="0">
-         <font>
-            <Font name="Times New Roman" size="50.0" />
-         </font></Label>
-        <Label fx:id="score1" alignment="CENTER" prefHeight="70.0" prefWidth="100" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="0">
-         <font>
-            <Font name="Times New Roman" size="50.0" />
-         </font></Label>
-        <Label fx:id="Answer2" alignment="CENTER" prefHeight="70.0" prefWidth="370" text="" textFill="WHITE" GridPane.rowIndex="1">
-         <font>
-            <Font name="Times New Roman" size="50.0" />
-         </font></Label>
-        <Label fx:id="score2" alignment="CENTER" prefHeight="70.0" prefWidth="100" text="" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
-         <font>
-            <Font name="Times New Roman" size="50.0" />
-         </font></Label>
-        <Label fx:id="Answer3" alignment="CENTER" prefHeight="70.0" prefWidth="370" text="" textFill="WHITE" GridPane.rowIndex="2">
-         <font>
-            <Font name="Times New Roman" size="50.0" />
-         </font>
-      </Label>
-        <Label fx:id="score3" alignment="CENTER" prefHeight="70.0" prefWidth="100" text="" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
-         <font>
-            <Font name="Times New Roman" size="50.0" />
-         </font></Label>
-        <Label fx:id="Answer4" alignment="CENTER" prefHeight="70.0" prefWidth="370" text="" textFill="WHITE" GridPane.rowIndex="3">
-         <font>
-            <Font name="Times New Roman" size="50.0" />
-         </font></Label>
-        <Label fx:id="score4" alignment="CENTER" prefHeight="70.0" prefWidth="100" text="" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
-         <font>
-            <Font name="Times New Roman" size="50.0" />
-         </font></Label>
-        <Label fx:id="Answer5" alignment="CENTER" prefHeight="70.0" prefWidth="370" text="" textFill="WHITE" GridPane.columnIndex="2">
-         <font>
-            <Font name="Times New Roman" size="50.0" />
-         </font></Label>
-        <Label fx:id="score5" alignment="CENTER" prefHeight="70.0" prefWidth="100" text="" textFill="WHITE" GridPane.columnIndex="3">
-         <font>
-            <Font name="Times New Roman" size="50.0" />
-         </font></Label>
-        <Label fx:id="Answer6" alignment="CENTER" prefHeight="70.0" prefWidth="370" text="" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
-         <font>
-            <Font name="Times New Roman" size="50.0" />
-         </font></Label>
-        <Label fx:id="score6" alignment="CENTER" prefHeight="70.0" prefWidth="100" text="" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
-         <font>
-            <Font name="Times New Roman" size="50.0" />
-         </font></Label>
-        <Label fx:id="Answer7" alignment="CENTER" prefHeight="70.0" prefWidth="370" text="" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
-         <font>
-            <Font name="Times New Roman" size="50.0" />
-         </font></Label>
-        <Label fx:id="score7" alignment="CENTER" prefHeight="70.0" prefWidth="100" text="" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="2">
-         <font>
-            <Font name="Times New Roman" size="50.0" />
-         </font></Label>
-        <Label fx:id="Answer8" alignment="CENTER" prefHeight="70.0" prefWidth="370" text="" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="3">
-         <font>
-            <Font name="Times New Roman" size="50.0" />
-         </font></Label>
-        <Label fx:id="score8" alignment="CENTER" prefHeight="70.0" prefWidth="100" text="" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="3">
-         <font>
-            <Font name="Times New Roman" size="50.0" />
-         </font></Label>
-
-    </GridPane>
-   <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="300.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" visible="false" fx:id="x1" />
-   <ImageView fitHeight="200.0" fitWidth="450.0" layoutX="175.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" visible="false" fx:id="x2" />
-   <ImageView fitHeight="200.0" fitWidth="700.0" layoutX="50.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" visible="false" fx:id="x3" />
-
-     <Label fx:id="team2Score" alignment="CENTER" layoutX="700.0" layoutY="250.0" prefHeight="100.0" prefWidth="100.0" text="0" textFill="WHITE">
-      <font>
-         <Font name="Times New Roman" size="50.0" />
-      </font>
-   </Label>
-   <Label fx:id="team1Score" alignment="CENTER" layoutY="250.0" prefHeight="100.0" prefWidth="100.0" text="0" textFill="WHITE">
-      <font>
-         <Font name="Times New Roman" size="50.0" />
-      </font>
-   </Label>
-   <Label fx:id="roundScore" alignment="CENTER" layoutX="350.0" layoutY="31.0" prefHeight="100.0" prefWidth="100.0" text="0" textFill="WHITE">
-      <font>
-         <Font name="Times New Roman" size="50.0" />
-      </font>
-   </Label>
-
-</AnchorPane>
+<StackPane fx:id="stackPane" nodeOrientation="LEFT_TO_RIGHT" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.slafamilyfeud2026.Round1Controller">
+   <children>
+      <Group StackPane.alignment="CENTER">
+         <children>
+            <AnchorPane fx:id="pain" onKeyPressed="#processKeyEvent">
+            
+                <ImageView fx:id="backgroundImage" fitHeight="600" fitWidth="800" preserveRatio="false" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
+            
+                <HBox prefWidth="800" spacing="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="20" />
+            
+            
+                <GridPane fx:id="answersGrid" layoutX="110.0" layoutY="188.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="188.0">
+            
+                    <columnConstraints>
+                        <ColumnConstraints prefWidth="230.0" />
+                        <ColumnConstraints prefWidth="60.0" />
+                     <ColumnConstraints minWidth="10.0" prefWidth="230.0" />
+                     <ColumnConstraints minWidth="10.0" prefWidth="60.0" />
+                    </columnConstraints>
+            
+                    <rowConstraints>
+                        <RowConstraints prefHeight="70.0" />
+                        <RowConstraints prefHeight="70.0" />
+                        <RowConstraints prefHeight="70.0" />
+                        <RowConstraints prefHeight="70.0" />
+                    </rowConstraints>
+                    <Label fx:id="Answer1" alignment="CENTER" prefHeight="70.0" prefWidth="370" text="" textFill="WHITE" GridPane.rowIndex="0">
+                     <font>
+                        <Font name="Times New Roman" size="50.0" />
+                     </font>
+                  </Label>
+                    <Label fx:id="score1" alignment="CENTER" prefHeight="70.0" prefWidth="100" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                     <font>
+                        <Font name="Times New Roman" size="50.0" />
+                     </font>
+                  </Label>
+                    <Label fx:id="Answer2" alignment="CENTER" prefHeight="70.0" prefWidth="370" text="" textFill="WHITE" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Times New Roman" size="50.0" />
+                     </font>
+                  </Label>
+                    <Label fx:id="score2" alignment="CENTER" prefHeight="70.0" prefWidth="100" text="" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Times New Roman" size="50.0" />
+                     </font>
+                  </Label>
+                    <Label fx:id="Answer3" alignment="CENTER" prefHeight="70.0" prefWidth="370" text="" textFill="WHITE" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Times New Roman" size="50.0" />
+                     </font>
+                  </Label>
+                    <Label fx:id="score3" alignment="CENTER" prefHeight="70.0" prefWidth="100" text="" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Times New Roman" size="50.0" />
+                     </font>
+                  </Label>
+                    <Label fx:id="Answer4" alignment="CENTER" prefHeight="70.0" prefWidth="370" text="" textFill="WHITE" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Times New Roman" size="50.0" />
+                     </font>
+                  </Label>
+                    <Label fx:id="score4" alignment="CENTER" prefHeight="70.0" prefWidth="100" text="" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Times New Roman" size="50.0" />
+                     </font>
+                  </Label>
+                    <Label fx:id="Answer5" alignment="CENTER" prefHeight="70.0" prefWidth="370" text="" textFill="WHITE" GridPane.columnIndex="2">
+                     <font>
+                        <Font name="Times New Roman" size="50.0" />
+                     </font>
+                  </Label>
+                    <Label fx:id="score5" alignment="CENTER" prefHeight="70.0" prefWidth="100" text="" textFill="WHITE" GridPane.columnIndex="3">
+                     <font>
+                        <Font name="Times New Roman" size="50.0" />
+                     </font>
+                  </Label>
+                    <Label fx:id="Answer6" alignment="CENTER" prefHeight="70.0" prefWidth="370" text="" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Times New Roman" size="50.0" />
+                     </font>
+                  </Label>
+                    <Label fx:id="score6" alignment="CENTER" prefHeight="70.0" prefWidth="100" text="" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Times New Roman" size="50.0" />
+                     </font>
+                  </Label>
+                    <Label fx:id="Answer7" alignment="CENTER" prefHeight="70.0" prefWidth="370" text="" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Times New Roman" size="50.0" />
+                     </font>
+                  </Label>
+                    <Label fx:id="score7" alignment="CENTER" prefHeight="70.0" prefWidth="100" text="" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Times New Roman" size="50.0" />
+                     </font>
+                  </Label>
+                    <Label fx:id="Answer8" alignment="CENTER" prefHeight="70.0" prefWidth="370" text="" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Times New Roman" size="50.0" />
+                     </font>
+                  </Label>
+                    <Label fx:id="score8" alignment="CENTER" prefHeight="70.0" prefWidth="100" text="" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Times New Roman" size="50.0" />
+                     </font>
+                  </Label>
+            
+                </GridPane>
+               <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="300.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" visible="false" fx:id="x1" />
+               <ImageView fitHeight="200.0" fitWidth="450.0" layoutX="175.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" visible="false" fx:id="x2" />
+               <ImageView fitHeight="200.0" fitWidth="700.0" layoutX="50.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" visible="false" fx:id="x3" />
+            
+                 <Label fx:id="team2Score" alignment="CENTER" layoutX="700.0" layoutY="250.0" prefHeight="100.0" prefWidth="100.0" text="0" textFill="WHITE">
+                  <font>
+                     <Font name="Times New Roman" size="50.0" />
+                  </font>
+               </Label>
+               <Label fx:id="team1Score" alignment="CENTER" layoutY="250.0" prefHeight="100.0" prefWidth="100.0" text="0" textFill="WHITE">
+                  <font>
+                     <Font name="Times New Roman" size="50.0" />
+                  </font>
+               </Label>
+               <Label fx:id="roundScore" alignment="CENTER" layoutX="350.0" layoutY="31.0" prefHeight="100.0" prefWidth="100.0" text="0" textFill="WHITE">
+                  <font>
+                     <Font name="Times New Roman" size="50.0" />
+                  </font>
+               </Label>
+            
+            </AnchorPane>
+         </children>
+      </Group>
+   </children>
+</StackPane>
