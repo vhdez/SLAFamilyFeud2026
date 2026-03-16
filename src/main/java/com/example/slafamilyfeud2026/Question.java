@@ -11,6 +11,8 @@ public class Question {
     private ArrayList<Answer> theAnswers;
     private Boolean beenAskedAlready;
     static ArrayList<Question> allTheQuestions;
+    static ArrayList<Question> round1Questions;
+    static ArrayList<Question> round2Questions;
 
     public Question(int questionNumber, String theQuestion, ArrayList<Answer> theAnswers) {
         this.questionNumber = questionNumber;
@@ -57,6 +59,39 @@ public class Question {
 
     public static void setAllTheQuestions(ArrayList<Question> allTheQuestions) {
         Question.allTheQuestions = allTheQuestions;
+    }
+
+
+    public static void setTest1Questions() {
+        for (int i = 0; i < 4; i++) {
+            Question.round1Questions.add(allTheQuestions.get(i));
+        }
+    }
+
+    public static void setTest2Questions() {
+        for (int i = 4; i < 9; i++) {
+            Question.round2Questions.add(allTheQuestions.get(i));
+        }
+    }
+
+    public static ArrayList<Question> getRound1Questions() {
+        return round1Questions;
+    }
+
+    public static void setRound1Questions(ArrayList<Integer> questionNumbers) {
+        for (Integer questionNumber : questionNumbers) {
+            Question.round1Questions.add(allTheQuestions.get(questionNumber-1));
+        }
+    }
+
+    public static ArrayList<Question> getRound2Questions() {
+        return round2Questions;
+    }
+
+    public static void setRound2Questions(ArrayList<Integer> questionNumbers) {
+        for (Integer questionNumber : questionNumbers) {
+            Question.round2Questions.add(allTheQuestions.get(questionNumber-1));
+        }
     }
 
     @Override

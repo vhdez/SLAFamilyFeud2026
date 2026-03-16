@@ -30,6 +30,8 @@ import javafx.util.Subscription;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Round1Controller {
 
@@ -69,6 +71,7 @@ public class Round1Controller {
     private boolean stealRound = false;
     private int currentQuestionNum = -1;
     private Question currentQuestion;
+    private ArrayList<Integer> questionNumbers =  new ArrayList<>();
 
     public void initialize() throws Exception {
         Screen screen = Screen.getPrimary();
@@ -96,7 +99,13 @@ public class Round1Controller {
         FileInputStream img3Input = new FileInputStream(x3File);
         Image x3Image = new Image(img3Input);
         x3.setImage(x3Image);
+
         Question.readQuestions();
+
+        Question.setTest1Questions(); // Test Set
+        // questionNumbers.addAll(Arrays.asList(1, 2, 3, 4)); // Use this during the actual game, change based on question numbers
+        // Question.setRound1Questions(questionNumbers);
+
         this.nextQuestion();
         System.out.println(Question.getAllTheQuestions().size() + " Questions Read");
         this.displayInstructions();
@@ -322,8 +331,8 @@ public class Round1Controller {
         score6.setText("");
         score7.setText("");
         score8.setText("");
-        if (currentQuestionNum < Question.getAllTheQuestions().size()) {
-            currentQuestion = Question.getAllTheQuestions().get(currentQuestionNum);
+        if (currentQuestionNum < Question.getRound1Questions().size()) {
+            currentQuestion = Question.getRound1Questions().get(currentQuestionNum);
             if (currentQuestion.getTheAnswers().size() >= 1) {
                 Answer1.setText(String.valueOf(1));
             }

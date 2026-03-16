@@ -44,23 +44,32 @@ public class Round2Controller {
     private Label[] p2AnswerLabels;
     private Label[] p2ScoreLabels;
 
+    private ArrayList<Integer> questionNumbers =  new ArrayList<>();
+
     @FXML
     public void initialize() throws Exception {
         Question.readQuestions();
         backgroundImage.setImage(new Image(new FileInputStream("src/round2BG.png")));
         ArrayList<Question> all = Question.getAllTheQuestions();
         int nextQuestionNumber = 0;
-        while (Question.getAllTheQuestions().get(nextQuestionNumber).getBeenAskedAlready()) {
-            nextQuestionNumber = nextQuestionNumber + 1;
-        }
-        if (nextQuestionNumber + 5 > all.size()) {
-            System.out.println("  [!] Round 2 does not have 5 unused questions available!");
-            return;
-        }
-        round2Questions = new ArrayList<>();
-        for (int i = nextQuestionNumber; i < nextQuestionNumber + 5; i++) {
-            round2Questions.add(all.get(i));
-        }
+        Question.setTest2Questions(); // Test Set
+        // questionNumbers.addAll(Arrays.asList(1, 2, 3, 4, 5)); // Use this during the actual game, change based on question numbers
+        // Question.setRound2Questions(questionNumbers);
+
+
+//        while (Question.getAllTheQuestions().get(nextQuestionNumber).getBeenAskedAlready()) {
+//            nextQuestionNumber = nextQuestionNumber + 1;
+//        }
+//        if (nextQuestionNumber + 5 > all.size()) {
+//            System.out.println("  [!] Round 2 does not have 5 unused questions available!");
+//            return;
+//        }
+
+        round2Questions = Question.getRound2Questions();
+
+//        for (int i = nextQuestionNumber; i < nextQuestionNumber + 5; i++) {
+//            round2Questions.add(all.get(i));
+//        }
 
         player1Answers = new String[round2Questions.size()];
         player2Answers = new String[round2Questions.size()];
