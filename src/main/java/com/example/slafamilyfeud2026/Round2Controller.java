@@ -107,7 +107,9 @@ public class Round2Controller {
         if (currentPhase == 2 || currentPhase == 4 || currentPhase == 5) {
             return;
         }
-        if (currentQuestionIndex >= round2Questions.size()) return;
+        if (currentQuestionIndex >= round2Questions.size()) {
+            return;
+        }
         currentQuestion = round2Questions.get(currentQuestionIndex);
         System.out.println("QUESTION: " + currentQuestion.getTheQuestion());
         int i = 1;
@@ -198,7 +200,7 @@ public class Round2Controller {
         if (currentPhase == 1 || currentPhase == 3) {
             if (currentQuestionIndex >= round2Questions.size()) {
                 if (currentPhase == 1) {
-                    currentPhase = 2;
+                    currentPhase = 3;
                     currentQuestionIndex = 0;
                     System.out.println("\n=== PLAYER 2's TURN ===");
                     displayInstructions();
