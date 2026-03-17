@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -17,18 +18,21 @@
          <children>
             <AnchorPane fx:id="pain" onKeyPressed="#processKeyEvent">
             
-                <ImageView fx:id="backgroundImage" fitHeight="600.0" fitWidth="1066.0" preserveRatio="false" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
+                <ImageView fx:id="backgroundImage" fitHeight="600.0" fitWidth="1066.0" preserveRatio="false" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0">
+                  <image>
+                     <Image url="@../../../../../round1BG.png" />
+                  </image></ImageView>
             
                 <HBox prefWidth="800" spacing="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="20" />
             
             
-                <GridPane fx:id="answersGrid" layoutX="110.0" layoutY="188.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="188.0">
+                <GridPane fx:id="answersGrid" layoutX="203.0" layoutY="157.0" prefHeight="280.0" prefWidth="662.0" AnchorPane.leftAnchor="203.0" AnchorPane.topAnchor="157.0">
             
                     <columnConstraints>
-                        <ColumnConstraints prefWidth="230.0" />
-                        <ColumnConstraints prefWidth="60.0" />
-                     <ColumnConstraints minWidth="10.0" prefWidth="230.0" />
-                     <ColumnConstraints minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints maxWidth="263.6715393066406" minWidth="233.16741943359375" prefWidth="255.23629760742188" />
+                        <ColumnConstraints maxWidth="93.68966674804688" minWidth="26.828460693359375" prefWidth="69.26370239257812" />
+                     <ColumnConstraints maxWidth="272.5906982421875" minWidth="10.0" prefWidth="261.34246826171875" />
+                     <ColumnConstraints maxWidth="152.24725341796875" minWidth="37.63800048828125" prefWidth="75.15753173828125" />
                     </columnConstraints>
             
                     <rowConstraints>
@@ -123,27 +127,27 @@
                <ImageView fitHeight="200.0" fitWidth="450.0" layoutX="180.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" visible="false" fx:id="x2" />
                <ImageView fitHeight="200.0" fitWidth="750.0" layoutX="55.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" visible="false" fx:id="x3" />
             
-                 <Label fx:id="team2Score" alignment="CENTER" layoutX="700.0" layoutY="250.0" prefHeight="100.0" prefWidth="100.0" text="0" textFill="WHITE">
+                 <Label fx:id="team2Score" alignment="CENTER" layoutX="929.0" layoutY="250.0" prefHeight="100.0" prefWidth="100.0" text="0" textFill="WHITE">
                   <font>
                      <Font name="Times New Roman" size="50.0" />
                   </font>
                </Label>
-               <Label fx:id="team1Score" alignment="CENTER" layoutY="250.0" prefHeight="100.0" prefWidth="100.0" text="0" textFill="WHITE">
+               <Label fx:id="team1Score" alignment="CENTER" layoutX="38.0" layoutY="250.0" prefHeight="100.0" prefWidth="100.0" text="0" textFill="WHITE">
                   <font>
                      <Font name="Times New Roman" size="50.0" />
                   </font>
                </Label>
-               <Label fx:id="roundScore" alignment="CENTER" layoutX="350.0" layoutY="31.0" prefHeight="100.0" prefWidth="100.0" text="0" textFill="WHITE">
+               <Label fx:id="roundScore" alignment="CENTER" layoutX="483.0" layoutY="31.0" prefHeight="100.0" prefWidth="100.0" text="0" textFill="WHITE">
                   <font>
                      <Font name="Times New Roman" size="50.0" />
                   </font>
                </Label>
-               <Label alignment="CENTER" layoutX="80.0" layoutY="31.0" prefHeight="100.0" prefWidth="193.0" text="Team 1" textFill="WHITE">
+               <Label fx:id="team1NameLabel" alignment="CENTER" layoutX="80.0" layoutY="31.0" prefHeight="100.0" prefWidth="193.0" text="Team 1" textFill="WHITE">
                   <font>
                      <Font name="Times New Roman" size="50.0" />
                   </font>
                </Label>
-               <Label alignment="CENTER" layoutX="604.0" layoutY="31.0" prefHeight="100.0" prefWidth="193.0" text="Team 2" textFill="WHITE">
+               <Label fx:id="team2NameLabel" alignment="CENTER" layoutX="795.0" layoutY="35.0" prefHeight="100.0" prefWidth="193.0" text="Team 2" textAlignment="CENTER" textFill="WHITE">
                   <font>
                      <Font name="Times New Roman" size="50.0" />
                   </font>
