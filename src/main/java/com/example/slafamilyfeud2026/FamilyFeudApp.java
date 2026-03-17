@@ -31,7 +31,7 @@ public class FamilyFeudApp extends Application {
         mainStage.setFullScreen(true);
         Round1Controller controller1 = fxmlLoader.getController();
         controller1.setupHandlers();
-     mainStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        mainStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         mainStage.show();
     }
 

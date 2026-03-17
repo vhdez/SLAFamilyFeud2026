@@ -45,6 +45,7 @@ public class Round2Controller {
     private Label[] p2ScoreLabels;
 
     private ArrayList<Integer> questionNumbers =  new ArrayList<>();
+    private Scanner scanner = new Scanner(System.in);
 
     @FXML
     public void initialize() throws Exception {
@@ -91,11 +92,7 @@ public class Round2Controller {
     public void setupHandlers() {
         Scene scene = pain.getScene();
         scene.setOnKeyPressed(event -> {
-            try {
-                processKeyEvent(event);
-            } catch (Exception e) {
-                System.out.println(e);
-            }
+            processKeyEvent(event);
         });
     }
 
@@ -122,14 +119,18 @@ public class Round2Controller {
         System.out.print("\n");
     }
 
-    public void processKeyEvent(KeyEvent event) throws Exception {
+    public void processKeyEvent(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
             handleEnter();
         } else if (event.getCode() == KeyCode.D) {
             displayCurrentQuestion();
         } else if (event.getCode() == KeyCode.SHIFT) {
             System.out.print(" SHIFT ");
-            FamilyFeudApp.Round1();
+            try {
+                FamilyFeudApp.Round1();
+            } catch (Exception ex) {
+                System.out.println("Can't switch to Round 1: " + ex);
+            }
         } else if (event.getCode() == KeyCode.H) {
             displayInstructions();
         } else {
@@ -148,10 +149,8 @@ public class Round2Controller {
         }
 
         if (key == KeyCode.W) {
-            Scanner scanner = new Scanner(System.in);
             System.out.print("Type wrong answer: ");
             String wrongAnswer = scanner.nextLine();
-            scanner.close();
             if (currentPhase == 1) {
                 player1Answers[currentQuestionIndex] = wrongAnswer;
                 player1Scores[currentQuestionIndex] = 0;
