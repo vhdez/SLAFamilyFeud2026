@@ -44,6 +44,8 @@ public class Round1Controller {
 
     public Label team1Score;
     public Label team2Score;
+    public Label team1NameLabel;
+    public Label team2NameLabel;
     public Label roundScore;
     public GridPane Answers;
     public Label    Answer1;
@@ -178,13 +180,25 @@ public class Round1Controller {
                     "-fx-background-color: lightblue;" + "-fx-background-radius: 15px;"
             );
             team2Score.setStyle(
-                    "-fx-backgroiund-color: blue;" + "-fx-background-radius: 15px;"
+                    "-fx-background-color: blue;" + "-fx-background-radius: 15px;"
+            );
+            team1NameLabel.setStyle(
+                    "-fx-background-color: lightblue;" + "-fx-background-radius: 15px;"
+            );
+            team2NameLabel.setStyle(
+                    "-fx-background-color: blue;" + "-fx-background-radius: 15px;"
             );
         } else if (currentTeam == 2) {
             team1Score.setStyle(
                     "-fx-background-color: blue;" + "-fx-background-radius: 15px;"
             );
             team2Score.setStyle(
+                    "-fx-background-color: lightblue;" + "-fx-background-radius: 15px;"
+            );
+            team1NameLabel.setStyle(
+                    "-fx-background-color: blue;" + "-fx-background-radius: 15px;"
+            );
+            team2NameLabel.setStyle(
                     "-fx-background-color: lightblue;" + "-fx-background-radius: 15px;"
             );
         }
@@ -359,6 +373,12 @@ public class Round1Controller {
                 "-fx-background-color: blue;" + "-fx-background-radius: 15px;"
         );
         team2Score.setStyle(
+                "-fx-background-color: blue;" + "-fx-background-radius: 15px;"
+        );
+        team1NameLabel.setStyle(
+                "-fx-background-color: blue;" + "-fx-background-radius: 15px;"
+        );
+        team2NameLabel.setStyle(
                 "-fx-background-color: blue;" + "-fx-background-radius: 15px;"
         );
         XsCount = 0;
