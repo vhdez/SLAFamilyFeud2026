@@ -79,9 +79,9 @@ public class Round1Controller {
 
 // Assuming 'root' is your main, outer layout pane
 // And 'content' is the inner pane with a fixed initial size (e.g., 1920x1080)
-        pain.setPrefSize(800, 600);
+        pain.setPrefSize(800, 450);
 
-        NumberBinding scaleBinding = Bindings.min(stackPane.widthProperty().divide(800), stackPane.heightProperty().divide(600));
+        NumberBinding scaleBinding = Bindings.min(stackPane.widthProperty().divide(800), stackPane.heightProperty().divide(450));
         stackPane.scaleXProperty().bind(scaleBinding);
         stackPane.scaleYProperty().bind(scaleBinding);
 

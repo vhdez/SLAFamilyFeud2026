@@ -15,7 +15,7 @@ public class FamilyFeudApp extends Application {
     public void start(Stage stage) throws IOException {
         mainStage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(FamilyFeudApp.class.getResource("Round1View.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+        Scene scene = new Scene(fxmlLoader.load(), 800, 450);
         mainStage.setTitle("Family Feud");
         mainStage.setScene(scene);
         Round1Controller controller = fxmlLoader.getController();
