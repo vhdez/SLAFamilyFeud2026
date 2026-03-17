@@ -10,9 +10,9 @@ public class Question {
     private String theQuestion;
     private ArrayList<Answer> theAnswers;
     private Boolean beenAskedAlready;
-    static ArrayList<Question> allTheQuestions;
-    static ArrayList<Question> round1Questions;
-    static ArrayList<Question> round2Questions;
+    static ArrayList<Question> allTheQuestions = new ArrayList<Question>();
+    static ArrayList<Question> round1Questions = new ArrayList<Question>();
+    static ArrayList<Question> round2Questions = new ArrayList<Question>();
 
     public Question(int questionNumber, String theQuestion, ArrayList<Answer> theAnswers) {
         this.questionNumber = questionNumber;
