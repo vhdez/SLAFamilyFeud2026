@@ -74,11 +74,6 @@ public class Round1Controller {
     private ArrayList<Integer> questionNumbers =  new ArrayList<>();
 
     public void initialize() throws Exception {
-        Screen screen = Screen.getPrimary();
-        Rectangle2D bounds = screen.getVisualBounds(); // Gets screen size accounting for taskbars
-
-// Assuming 'root' is your main, outer layout pane
-// And 'content' is the inner pane with a fixed initial size (e.g., 1920x1080)
         pain.setPrefSize(1066, 600);
 
         NumberBinding scaleBinding = Bindings.min(stackPane.widthProperty().divide(1066), stackPane.heightProperty().divide(600));
