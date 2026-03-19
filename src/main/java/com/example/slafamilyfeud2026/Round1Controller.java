@@ -17,6 +17,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -99,9 +100,9 @@ public class Round1Controller {
 
         Question.readQuestions();
 
-        Question.setTest1Questions(); // Test Set
-        // questionNumbers.addAll(Arrays.asList(1, 2, 3, 4)); // Use this during the actual game, change based on question numbers
-        // Question.setRound1Questions(questionNumbers);
+        //Question.setTest1Questions(); // Test Set
+        questionNumbers.addAll(Arrays.asList(6, 8, 12, 29)); // Use this during the actual game, change based on question numbers
+        Question.setRound1Questions(questionNumbers);
 
         this.nextQuestion();
         System.out.println(Question.getAllTheQuestions().size() + " Questions Read");
@@ -316,6 +317,11 @@ public class Round1Controller {
 
         // 3. Make it reverse (grow back)
         label.setText(answer);
+        int answerLength = answer.length();
+        int excessLength = answerLength - 9;
+        if (excessLength > 0) {
+            label.setFont(new Font("Times New Roman", 50-(excessLength*3)));
+        }
         st.setAutoReverse(true);
         st.setCycleCount(2); // One cycle down, one cycle up
 
@@ -325,13 +331,21 @@ public class Round1Controller {
     public void nextQuestion() throws Exception {
         currentQuestionNum++;
         Answer1.setText("");
+        Answer1.setFont(new Font("Times New Roman", 50));
         Answer2.setText("");
+        Answer2.setFont(new Font("Times New Roman", 50));
         Answer3.setText("");
+        Answer3.setFont(new Font("Times New Roman", 50));
         Answer4.setText("");
+        Answer4.setFont(new Font("Times New Roman", 50));
         Answer5.setText("");
+        Answer5.setFont(new Font("Times New Roman", 50));
         Answer6.setText("");
+        Answer6.setFont(new Font("Times New Roman", 50));
         Answer7.setText("");
+        Answer7.setFont(new Font("Times New Roman", 50));
         Answer8.setText("");
+        Answer8.setFont(new Font("Times New Roman", 50));
         score1.setText("");
         score2.setText("");
         score3.setText("");

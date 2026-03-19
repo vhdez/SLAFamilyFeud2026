@@ -1,7 +1,5 @@
 package com.example.slafamilyfeud2026;
 
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.NumberBinding;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -10,16 +8,18 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.Text;
 
 import java.io.FileInputStream;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Round2Controller {
+
     public AnchorPane pain;
-    public StackPane stackPane;
     public Label totalScoreLabel;
     public Label phaseLabel;
     public ImageView backgroundImage;
@@ -29,9 +29,12 @@ public class Round2Controller {
     public Label score1, score2, score3, score4, score5;
     public Label score6, score7, score8, score9, score10;
 
+    Integer playerTurn;
     Question currentQuestion;
     ArrayList<Integer> selectedAnswers;
     ArrayList<Question> round2Questions;
+    Label[] answerLabels;
+    Label[] scoreLabels;
 
     private String[] player1Answers;
     private String[] player2Answers;
@@ -40,7 +43,6 @@ public class Round2Controller {
 
     private int currentPhase = 1;
     private int currentQuestionIndex = 0;
-    private int revealIndex = 0;
     private int totalScore = 0;
 
     private Label[] p1AnswerLabels;
@@ -48,38 +50,23 @@ public class Round2Controller {
     private Label[] p2AnswerLabels;
     private Label[] p2ScoreLabels;
 
-    private ArrayList<Integer> questionNumbers =  new ArrayList<>();
-    private Scanner scanner = new Scanner(System.in);
-
     @FXML
     public void initialize() throws Exception {
-        pain.setPrefSize(1066, 600);
-
-        NumberBinding scaleBinding = Bindings.min(stackPane.widthProperty().divide(1066), stackPane.heightProperty().divide(600));
-        stackPane.scaleXProperty().bind(scaleBinding);
-        stackPane.scaleYProperty().bind(scaleBinding);
-        Question.readQuestions();
         backgroundImage.setImage(new Image(new FileInputStream("src/round2BG.png")));
+
         ArrayList<Question> all = Question.getAllTheQuestions();
         int nextQuestionNumber = 0;
-        Question.setTest2Questions(); // Test Set
-        // questionNumbers.addAll(Arrays.asList(1, 2, 3, 4, 5)); // Use this during the actual game, change based on question numbers
-        // Question.setRound2Questions(questionNumbers);
-
-
-//        while (Question.getAllTheQuestions().get(nextQuestionNumber).getBeenAskedAlready()) {
-//            nextQuestionNumber = nextQuestionNumber + 1;
-//        }
-//        if (nextQuestionNumber + 5 > all.size()) {
-//            System.out.println("  [!] Round 2 does not have 5 unused questions available!");
-//            return;
-//        }
-
-        round2Questions = Question.getRound2Questions();
-
-//        for (int i = nextQuestionNumber; i < nextQuestionNumber + 5; i++) {
-//            round2Questions.add(all.get(i));
-//        }
+        while (nextQuestionNumber < all.size() && all.get(nextQuestionNumber).getBeenAskedAlready()) {
+            nextQuestionNumber++;
+        }
+        if (nextQuestionNumber + 5 > all.size()) {
+            System.out.println("  [!] Round 2 does not have 5 unused questions available!");
+            return;
+        }
+        round2Questions = new ArrayList<>();
+        for (int i = nextQuestionNumber; i < nextQuestionNumber + 5; i++) {
+            round2Questions.add(all.get(i));
+        }
 
         player1Answers = new String[round2Questions.size()];
         player2Answers = new String[round2Questions.size()];
@@ -101,24 +88,25 @@ public class Round2Controller {
     public void setupHandlers() {
         Scene scene = pain.getScene();
         scene.setOnKeyPressed(event -> {
-            processKeyEvent(event);
+            try {
+                processKeyEvent(event);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         });
     }
 
     public void displayInstructions() {
         System.out.println("Round 2 INSTRUCTIONS: Press key...");
-        System.out.println("     ANSWER   keys: 1 - 8 for correct answer; W for wrong answer (then type it)");
-        System.out.println("     QUESTION key : ENTER to advance / reveal; D to display question");
+        System.out.println("     ANSWER   keys: 1 - 8 for correct answer; W for wrong answer");
+        System.out.println("     WRONG    key : 0 to play wrong answer sound");
+        System.out.println("     QUESTION key : ENTER to reveal score / advance; D to display question");
         System.out.println("     ROUND    key : SHIFT back to Round 1");
     }
 
     public void displayCurrentQuestion() {
-        if (currentPhase == 2 || currentPhase == 4 || currentPhase == 5) {
-            return;
-        }
-        if (currentQuestionIndex >= round2Questions.size()) {
-            return;
-        }
+        if (currentPhase == 5) return;
+        if (currentQuestionIndex >= round2Questions.size()) return;
         currentQuestion = round2Questions.get(currentQuestionIndex);
         System.out.println("QUESTION: " + currentQuestion.getTheQuestion());
         int i = 1;
@@ -130,29 +118,26 @@ public class Round2Controller {
         System.out.print("\n");
     }
 
-    public void processKeyEvent(KeyEvent event) {
+    public void processKeyEvent(KeyEvent event) throws Exception {
         if (event.getCode() == KeyCode.ENTER) {
             handleEnter();
         } else if (event.getCode() == KeyCode.D) {
             displayCurrentQuestion();
         } else if (event.getCode() == KeyCode.SHIFT) {
             System.out.print(" SHIFT ");
-            try {
-                FamilyFeudApp.Round1();
-            } catch (Exception ex) {
-                System.out.println("Can't switch to Round 1: " + ex);
-            }
+            FamilyFeudApp.Round1();
         } else if (event.getCode() == KeyCode.H) {
             displayInstructions();
+        } else if (event.getCode() == KeyCode.DIGIT0) {
+            playSound("src/wrong-answer-sound-effect.mp3");
+            System.out.print(" WRONG ");
         } else {
             handleAnswerKey(event.getCode());
         }
     }
 
-    public void handleAnswerKey(KeyCode key) {
-        if (currentPhase == 2 || currentPhase == 4) {
-            return;
-        }
+    public void handleAnswerKey(KeyCode key) throws Exception {
+        if (currentPhase == 5) return;
 
         if (currentQuestionIndex >= round2Questions.size()) {
             System.out.println("  [!] Only " + round2Questions.size() + " questions loaded.");
@@ -160,17 +145,27 @@ public class Round2Controller {
         }
 
         if (key == KeyCode.W) {
+            Scanner scanner = new Scanner(System.in);
             System.out.print("Type wrong answer: ");
             String wrongAnswer = scanner.nextLine();
+            scanner.close();
             if (currentPhase == 1) {
                 player1Answers[currentQuestionIndex] = wrongAnswer;
                 player1Scores[currentQuestionIndex] = 0;
                 p1AnswerLabels[currentQuestionIndex].setText(wrongAnswer);
+                fitTextToLabel(p1AnswerLabels[currentQuestionIndex]);
                 p1ScoreLabels[currentQuestionIndex].setText("?");
             } else if (currentPhase == 3) {
+                if (player1Answers[currentQuestionIndex] != null &&
+                        player1Answers[currentQuestionIndex].equalsIgnoreCase(wrongAnswer)) {
+                    System.out.println("  [!] Player 2 can't give the same answer as Player 1!");
+                    playSound("src/wrong-answer-sound-effect.mp3");
+                    return;
+                }
                 player2Answers[currentQuestionIndex] = wrongAnswer;
                 player2Scores[currentQuestionIndex] = 0;
                 p2AnswerLabels[currentQuestionIndex].setText(wrongAnswer);
+                fitTextToLabel(p2AnswerLabels[currentQuestionIndex]);
                 p2ScoreLabels[currentQuestionIndex].setText("?");
             }
             System.out.print(" WRONG ");
@@ -191,12 +186,20 @@ public class Round2Controller {
                 player1Answers[currentQuestionIndex] = chosen.getAnAnswer();
                 player1Scores[currentQuestionIndex] = chosen.getItsScore();
                 p1AnswerLabels[currentQuestionIndex].setText(chosen.getAnAnswer());
+                fitTextToLabel(p1AnswerLabels[currentQuestionIndex]);
                 p1ScoreLabels[currentQuestionIndex].setText("?");
                 System.out.print(" " + (answerIndex + 1) + " ");
             } else if (currentPhase == 3) {
+                if (player1Answers[currentQuestionIndex] != null &&
+                        player1Answers[currentQuestionIndex].equalsIgnoreCase(chosen.getAnAnswer())) {
+                    System.out.println("  [!] Player 2 can't give the same answer as Player 1!");
+                    playSound("src/wrong-answer-sound-effect.mp3");
+                    return;
+                }
                 player2Answers[currentQuestionIndex] = chosen.getAnAnswer();
                 player2Scores[currentQuestionIndex] = chosen.getItsScore();
                 p2AnswerLabels[currentQuestionIndex].setText(chosen.getAnAnswer());
+                fitTextToLabel(p2AnswerLabels[currentQuestionIndex]);
                 p2ScoreLabels[currentQuestionIndex].setText("?");
                 System.out.print(" " + (answerIndex + 1) + " ");
             }
@@ -205,7 +208,7 @@ public class Round2Controller {
         System.out.println("  Press ENTER to reveal score.");
     }
 
-    public void handleEnter() {
+    public void handleEnter() throws Exception {
         if (currentPhase == 1 || currentPhase == 3) {
             if (currentQuestionIndex >= round2Questions.size()) {
                 if (currentPhase == 1) {
@@ -261,6 +264,23 @@ public class Round2Controller {
         }
     }
 
+    public void fitTextToLabel(Label label) {
+        label.setWrapText(false);
+        double fontSize = 40.0;
+        double maxWidth = 303.0;
+        String family = label.getFont().getFamily();
+        while (label.getText() != null && !label.getText().isEmpty() && fontSize > 6) {
+            label.setFont(javafx.scene.text.Font.font(family, fontSize));
+            Text helper = new Text(label.getText());
+            helper.setFont(label.getFont());
+            if (helper.getBoundsInLocal().getWidth() <= maxWidth - 10) {
+                break;
+            }
+            fontSize -= 1;
+        }
+        label.setFont(javafx.scene.text.Font.font(family, fontSize));
+    }
+
     public void clearBoard() {
         for (int i = 0; i < 5; i++) {
             p1AnswerLabels[i].setText("");
@@ -274,7 +294,6 @@ public class Round2Controller {
     public void resetRound() {
         currentPhase = 1;
         currentQuestionIndex = 0;
-        revealIndex = 0;
         totalScore = 0;
         player1Answers = new String[round2Questions.size()];
         player2Answers = new String[round2Questions.size()];
@@ -284,6 +303,17 @@ public class Round2Controller {
         System.out.println("\n=== ROUND 2 RESET ===");
         displayInstructions();
         displayCurrentQuestion();
+    }
+
+    public void playSound(String audioFilePath) throws Exception {
+        try {
+            String soundPath = Paths.get(audioFilePath).toUri().toString();
+            Media sound = new Media(soundPath);
+            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.play();
+        } catch (Exception e) {
+            System.out.println("Could not play sound: " + e.getMessage());
+        }
     }
 
     private int keyToIndex(KeyCode key) {
