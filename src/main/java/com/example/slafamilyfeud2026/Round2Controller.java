@@ -1,5 +1,7 @@
 package com.example.slafamilyfeud2026;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.NumberBinding;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -8,6 +10,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
@@ -20,6 +23,7 @@ import java.util.Scanner;
 public class Round2Controller {
 
     public AnchorPane pain;
+    public StackPane stackPane;
     public Label totalScoreLabel;
     public Label phaseLabel;
     public ImageView backgroundImage;
@@ -52,6 +56,13 @@ public class Round2Controller {
 
     @FXML
     public void initialize() throws Exception {
+        pain.setPrefSize(1066, 600);
+
+        NumberBinding scaleBinding = Bindings.min(stackPane.widthProperty().divide(1066), stackPane.heightProperty().divide(600));
+        stackPane.scaleXProperty().bind(scaleBinding);
+        stackPane.scaleYProperty().bind(scaleBinding);
+
+
         backgroundImage.setImage(new Image(new FileInputStream("src/round2BG.png")));
 
         ArrayList<Question> all = Question.getAllTheQuestions();
