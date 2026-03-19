@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.Text;
 
 import java.io.FileInputStream;
 import java.nio.file.Paths;
@@ -152,6 +153,7 @@ public class Round2Controller {
                 player1Answers[currentQuestionIndex] = wrongAnswer;
                 player1Scores[currentQuestionIndex] = 0;
                 p1AnswerLabels[currentQuestionIndex].setText(wrongAnswer);
+                fitTextToLabel(p1AnswerLabels[currentQuestionIndex]);
                 p1ScoreLabels[currentQuestionIndex].setText("?");
             } else if (currentPhase == 3) {
                 if (player1Answers[currentQuestionIndex] != null &&
@@ -163,6 +165,7 @@ public class Round2Controller {
                 player2Answers[currentQuestionIndex] = wrongAnswer;
                 player2Scores[currentQuestionIndex] = 0;
                 p2AnswerLabels[currentQuestionIndex].setText(wrongAnswer);
+                fitTextToLabel(p2AnswerLabels[currentQuestionIndex]);
                 p2ScoreLabels[currentQuestionIndex].setText("?");
             }
             System.out.print(" WRONG ");
@@ -183,6 +186,7 @@ public class Round2Controller {
                 player1Answers[currentQuestionIndex] = chosen.getAnAnswer();
                 player1Scores[currentQuestionIndex] = chosen.getItsScore();
                 p1AnswerLabels[currentQuestionIndex].setText(chosen.getAnAnswer());
+                fitTextToLabel(p1AnswerLabels[currentQuestionIndex]);
                 p1ScoreLabels[currentQuestionIndex].setText("?");
                 System.out.print(" " + (answerIndex + 1) + " ");
             } else if (currentPhase == 3) {
@@ -195,6 +199,7 @@ public class Round2Controller {
                 player2Answers[currentQuestionIndex] = chosen.getAnAnswer();
                 player2Scores[currentQuestionIndex] = chosen.getItsScore();
                 p2AnswerLabels[currentQuestionIndex].setText(chosen.getAnAnswer());
+                fitTextToLabel(p2AnswerLabels[currentQuestionIndex]);
                 p2ScoreLabels[currentQuestionIndex].setText("?");
                 System.out.print(" " + (answerIndex + 1) + " ");
             }
@@ -257,6 +262,23 @@ public class Round2Controller {
         } else if (currentPhase == 5) {
             resetRound();
         }
+    }
+
+    public void fitTextToLabel(Label label) {
+        label.setWrapText(false);
+        double fontSize = 40.0;
+        double maxWidth = 303.0;
+        String family = label.getFont().getFamily();
+        while (label.getText() != null && !label.getText().isEmpty() && fontSize > 6) {
+            label.setFont(javafx.scene.text.Font.font(family, fontSize));
+            Text helper = new Text(label.getText());
+            helper.setFont(label.getFont());
+            if (helper.getBoundsInLocal().getWidth() <= maxWidth - 10) {
+                break;
+            }
+            fontSize -= 1;
+        }
+        label.setFont(javafx.scene.text.Font.font(family, fontSize));
     }
 
     public void clearBoard() {
