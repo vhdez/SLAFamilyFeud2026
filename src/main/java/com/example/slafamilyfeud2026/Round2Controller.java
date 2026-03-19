@@ -14,6 +14,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
 import java.io.FileInputStream;
 import java.nio.file.Paths;
@@ -33,6 +36,11 @@ public class Round2Controller {
     public Label answer6, answer7, answer8, answer9, answer10;
     public Label score1, score2, score3, score4, score5;
     public Label score6, score7, score8, score9, score10;
+
+    public Label timeLabel;
+    private Timeline timer;
+    private int secondsRemaining;
+    private static final int TIMER_DURATION = 30;
 
     Integer playerTurn;
     Question currentQuestion;
@@ -121,6 +129,7 @@ public class Round2Controller {
         System.out.println("     WRONG    key : 0 to play wrong answer sound");
         System.out.println("     QUESTION key : ENTER to reveal score / advance; D to display question");
         System.out.println("     ROUND    key : SHIFT back to Round 1");
+        System.out.println("     TIMER    keys: T to start, S to stop, R to reset");
     }
 
     public void displayCurrentQuestion() {
@@ -150,6 +159,15 @@ public class Round2Controller {
         } else if (event.getCode() == KeyCode.DIGIT0) {
             playSound("src/wrong-answer-sound-effect.mp3");
             System.out.print(" WRONG ");
+        } else if (event.getCode() == KeyCode.T) {
+            startTimer();
+            System.out.println(" TIMER STARTED ");
+        } else if (event.getCode() == KeyCode.R) {
+            resetTimer();
+            System.out.println(" TIMER RESET ");
+        } else if (event.getCode() == KeyCode.S) {
+            stopTimer();
+            System.out.println(" TIMER STOPPED ");
         } else {
             handleAnswerKey(event.getCode());
         }
@@ -347,5 +365,39 @@ public class Round2Controller {
             case DIGIT8 -> 7;
             default -> -1;
         };
+    }
+
+    public void startTimer() {
+        if (timer != null) {
+            timer.stop();
+        }
+        secondsRemaining = TIMER_DURATION;
+        timeLabel.setText(String.valueOf(secondsRemaining));
+
+        timer = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            secondsRemaining--;
+            timeLabel.setText(String.valueOf(secondsRemaining));
+
+            if (secondsRemaining <= 0) {
+                timer.stop();
+                System.out.println("TIME'S UP!");
+            }
+        }));
+
+        timer.setCycleCount(TIMER_DURATION);
+        timer.play();
+    }
+    public void stopTimer() {
+        if (timer != null) {
+            timer.stop();
+        }
+    }
+
+    public void resetTimer() {
+        if (timer != null) {
+            timer.stop();
+        }
+        secondsRemaining = TIMER_DURATION;
+        timeLabel.setText(String.valueOf(secondsRemaining));
     }
 }
