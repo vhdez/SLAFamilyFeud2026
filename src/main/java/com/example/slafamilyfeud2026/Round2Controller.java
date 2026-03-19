@@ -1,5 +1,7 @@
 package com.example.slafamilyfeud2026;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.NumberBinding;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -8,17 +10,16 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.layout.StackPane;
 
 import java.io.FileInputStream;
-import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Round2Controller {
-
     public AnchorPane pain;
+    public StackPane stackPane;
     public Label totalScoreLabel;
     public Label phaseLabel;
     public ImageView backgroundImage;
@@ -28,7 +29,6 @@ public class Round2Controller {
     public Label score1, score2, score3, score4, score5;
     public Label score6, score7, score8, score9, score10;
 
-    Integer playerTurn;
     Question currentQuestion;
     ArrayList<Integer> selectedAnswers;
     ArrayList<Question> round2Questions;
@@ -272,6 +272,7 @@ public class Round2Controller {
     public void resetRound() {
         currentPhase = 1;
         currentQuestionIndex = 0;
+        revealIndex = 0;
         totalScore = 0;
         player1Answers = new String[round2Questions.size()];
         player2Answers = new String[round2Questions.size()];
