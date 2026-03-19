@@ -1,5 +1,7 @@
 package com.example.slafamilyfeud2026;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.NumberBinding;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -8,6 +10,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
@@ -15,11 +18,13 @@ import javafx.scene.text.Text;
 import java.io.FileInputStream;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Round2Controller {
 
     public AnchorPane pain;
+    public StackPane stackPane;
     public Label totalScoreLabel;
     public Label phaseLabel;
     public ImageView backgroundImage;
@@ -49,24 +54,38 @@ public class Round2Controller {
     private Label[] p1ScoreLabels;
     private Label[] p2AnswerLabels;
     private Label[] p2ScoreLabels;
+    private final ArrayList<Integer> questionNumbers =  new ArrayList<>();
 
     @FXML
     public void initialize() throws Exception {
+        pain.setPrefSize(1066, 600);
+
+        NumberBinding scaleBinding = Bindings.min(stackPane.widthProperty().divide(1066), stackPane.heightProperty().divide(600));
+        stackPane.scaleXProperty().bind(scaleBinding);
+        stackPane.scaleYProperty().bind(scaleBinding);
+
+
         backgroundImage.setImage(new Image(new FileInputStream("src/round2BG.png")));
 
-        ArrayList<Question> all = Question.getAllTheQuestions();
-        int nextQuestionNumber = 0;
-        while (nextQuestionNumber < all.size() && all.get(nextQuestionNumber).getBeenAskedAlready()) {
-            nextQuestionNumber++;
-        }
-        if (nextQuestionNumber + 5 > all.size()) {
-            System.out.println("  [!] Round 2 does not have 5 unused questions available!");
-            return;
-        }
-        round2Questions = new ArrayList<>();
-        for (int i = nextQuestionNumber; i < nextQuestionNumber + 5; i++) {
-            round2Questions.add(all.get(i));
-        }
+//        ArrayList<Question> all = Question.getAllTheQuestions();
+//        int nextQuestionNumber = 0;
+//        while (nextQuestionNumber < all.size() && all.get(nextQuestionNumber).getBeenAskedAlready()) {
+//            nextQuestionNumber++;
+//        }
+//        if (nextQuestionNumber + 5 > all.size()) {
+//            System.out.println("  [!] Round 2 does not have 5 unused questions available!");
+//            return;
+//        }
+//        round2Questions = new ArrayList<>();
+//        for (int i = nextQuestionNumber; i < nextQuestionNumber + 5; i++) {
+//            round2Questions.add(all.get(i));
+//        }
+
+        //Question.setTest2Questions(); // Test Set
+        questionNumbers.addAll(Arrays.asList(13, 19, 14, 28, 16)); // Use this during the actual game, change based on question numbers
+        Question.setRound2Questions(questionNumbers);
+
+        round2Questions = Question.getRound2Questions();
 
         player1Answers = new String[round2Questions.size()];
         player2Answers = new String[round2Questions.size()];

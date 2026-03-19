@@ -2,12 +2,7 @@ package com.example.slafamilyfeud2026;
 
 import javafx.animation.ScaleTransition;
 import javafx.beans.binding.Bindings;
-import javafx.beans.binding.DoubleBinding;
 import javafx.beans.binding.NumberBinding;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -15,21 +10,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.net.URL;
-import javafx.util.Subscription;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,7 +36,6 @@ public class Round1Controller {
     public Label team1NameLabel;
     public Label team2NameLabel;
     public Label roundScore;
-    public GridPane Answers;
     public Label    Answer1;
     public Label	Answer2;
     public Label	Answer3;
@@ -74,7 +61,7 @@ public class Round1Controller {
     private boolean stealRound = false;
     private int currentQuestionNum = -1;
     private Question currentQuestion;
-    private ArrayList<Integer> questionNumbers =  new ArrayList<>();
+    private final ArrayList<Integer> questionNumbers =  new ArrayList<>();
 
     public void initialize() throws Exception {
         pain.setPrefSize(1066, 600);
@@ -131,15 +118,12 @@ public class Round1Controller {
     }
 
     public void setupHandlers() {
-        Scene scene = pain.getScene();;
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                try {
-                    processKeyEvent(keyEvent);
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
+        Scene scene = pain.getScene();
+        scene.setOnKeyPressed(keyEvent -> {
+            try {
+                processKeyEvent(keyEvent);
+            } catch (Exception e) {
+                System.out.println("Exception: " + e);
             }
         });
     }
@@ -174,7 +158,7 @@ public class Round1Controller {
         }
     }
 
-    public void selectTeam(int newTeam) throws Exception {
+    public void selectTeam(int newTeam) {
         currentTeam = newTeam;
         if (currentTeam == 1) {
             team1Score.setStyle(
@@ -205,16 +189,16 @@ public class Round1Controller {
         }
     }
 
-    public void currentQuestion(KeyCode keyCode) throws Exception {
+    public void currentQuestion(KeyCode keyCode) {
         if (keyCode == KeyCode.DIGIT1) {
-            if (currentQuestion.getTheAnswers().size() < 1) {
+            if (currentQuestion.getTheAnswers().isEmpty()) {
                 return;
             }
-            if (!currentQuestion.getTheAnswers().get(0).getAnswered()) {
-                currentQuestion.getTheAnswers().get(0).setAnswered(true);
-                labelTransition(Answer1, currentQuestion.getTheAnswers().get(0).getAnAnswer());
-                labelTransition(score1, currentQuestion.getTheAnswers().get(0).getItsScore().toString());
-                currentRoundScore += currentQuestion.getTheAnswers().get(0).getItsScore();
+            if (!currentQuestion.getTheAnswers().getFirst().getAnswered()) {
+                currentQuestion.getTheAnswers().getFirst().setAnswered(true);
+                labelTransition(Answer1, currentQuestion.getTheAnswers().getFirst().getAnAnswer());
+                labelTransition(score1, currentQuestion.getTheAnswers().getFirst().getItsScore().toString());
+                currentRoundScore += currentQuestion.getTheAnswers().getFirst().getItsScore();
                 System.out.print(" 1 ");
                 playSound("src/correct-answer-ff.mp3");
             }
@@ -328,7 +312,7 @@ public class Round1Controller {
         st.play();
     }
 
-    public void nextQuestion() throws Exception {
+    public void nextQuestion() {
         currentQuestionNum++;
         Answer1.setText("");
         Answer1.setFont(new Font("Times New Roman", 50));
@@ -356,7 +340,7 @@ public class Round1Controller {
         score8.setText("");
         if (currentQuestionNum < Question.getRound1Questions().size()) {
             currentQuestion = Question.getRound1Questions().get(currentQuestionNum);
-            if (currentQuestion.getTheAnswers().size() >= 1) {
+            if (!currentQuestion.getTheAnswers().isEmpty()) {
                 Answer1.setText(String.valueOf(1));
             }
             if (currentQuestion.getTheAnswers().size() >= 2) {
@@ -399,7 +383,7 @@ public class Round1Controller {
         stealRound = false;
     }
 
-    public void wrongAnswer() throws Exception {
+    public void wrongAnswer() {
         if (stealRound) {
             XsCount++;
             if (XsCount == 1) {
@@ -446,7 +430,7 @@ public class Round1Controller {
         x3.setVisible(false);
     }
 
-    public void playSound(String audioFilePath) throws Exception {
+    public void playSound(String audioFilePath) {
         try {
             String soundPath = Paths.get(audioFilePath).toUri().toString();
             Media sound = new Media(soundPath);
