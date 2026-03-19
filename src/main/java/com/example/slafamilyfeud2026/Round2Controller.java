@@ -53,9 +53,9 @@ public class Round2Controller {
 
     @FXML
     public void initialize() throws Exception {
-        pain.setPrefSize(800, 450);
+        pain.setPrefSize(1066, 600);
 
-        NumberBinding scaleBinding = Bindings.min(stackPane.widthProperty().divide(800), stackPane.heightProperty().divide(450));
+        NumberBinding scaleBinding = Bindings.min(stackPane.widthProperty().divide(1066), stackPane.heightProperty().divide(600));
         stackPane.scaleXProperty().bind(scaleBinding);
         stackPane.scaleYProperty().bind(scaleBinding);
         Question.readQuestions();
