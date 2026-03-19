@@ -18,6 +18,7 @@ import javafx.scene.text.Text;
 import java.io.FileInputStream;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Round2Controller {
@@ -53,6 +54,7 @@ public class Round2Controller {
     private Label[] p1ScoreLabels;
     private Label[] p2AnswerLabels;
     private Label[] p2ScoreLabels;
+    private final ArrayList<Integer> questionNumbers =  new ArrayList<>();
 
     @FXML
     public void initialize() throws Exception {
@@ -65,19 +67,25 @@ public class Round2Controller {
 
         backgroundImage.setImage(new Image(new FileInputStream("src/round2BG.png")));
 
-        ArrayList<Question> all = Question.getAllTheQuestions();
-        int nextQuestionNumber = 0;
-        while (nextQuestionNumber < all.size() && all.get(nextQuestionNumber).getBeenAskedAlready()) {
-            nextQuestionNumber++;
-        }
-        if (nextQuestionNumber + 5 > all.size()) {
-            System.out.println("  [!] Round 2 does not have 5 unused questions available!");
-            return;
-        }
-        round2Questions = new ArrayList<>();
-        for (int i = nextQuestionNumber; i < nextQuestionNumber + 5; i++) {
-            round2Questions.add(all.get(i));
-        }
+//        ArrayList<Question> all = Question.getAllTheQuestions();
+//        int nextQuestionNumber = 0;
+//        while (nextQuestionNumber < all.size() && all.get(nextQuestionNumber).getBeenAskedAlready()) {
+//            nextQuestionNumber++;
+//        }
+//        if (nextQuestionNumber + 5 > all.size()) {
+//            System.out.println("  [!] Round 2 does not have 5 unused questions available!");
+//            return;
+//        }
+//        round2Questions = new ArrayList<>();
+//        for (int i = nextQuestionNumber; i < nextQuestionNumber + 5; i++) {
+//            round2Questions.add(all.get(i));
+//        }
+
+        //Question.setTest2Questions(); // Test Set
+        questionNumbers.addAll(Arrays.asList(13, 19, 14, 28, 16)); // Use this during the actual game, change based on question numbers
+        Question.setRound2Questions(questionNumbers);
+
+        round2Questions = Question.getRound2Questions();
 
         player1Answers = new String[round2Questions.size()];
         player2Answers = new String[round2Questions.size()];
