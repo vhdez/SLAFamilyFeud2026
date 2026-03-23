@@ -225,6 +225,7 @@ public class Round2Controller {
                 p1AnswerLabels[currentQuestionIndex].setText(chosen.getAnAnswer());
                 fitTextToLabel(p1AnswerLabels[currentQuestionIndex]);
                 p1ScoreLabels[currentQuestionIndex].setText("?");
+                playSound("src/family-feud-you-said.mp3");
                 System.out.print(" " + (answerIndex + 1) + " ");
             } else if (currentPhase == 3) {
                 if (player1Answers[currentQuestionIndex] != null &&
@@ -237,6 +238,7 @@ public class Round2Controller {
                 player2Scores[currentQuestionIndex] = chosen.getItsScore();
                 p2AnswerLabels[currentQuestionIndex].setText(chosen.getAnAnswer());
                 fitTextToLabel(p2AnswerLabels[currentQuestionIndex]);
+                playSound("src/family-feud-you-said.mp3");
                 p2ScoreLabels[currentQuestionIndex].setText("?");
                 System.out.print(" " + (answerIndex + 1) + " ");
             }
@@ -268,6 +270,7 @@ public class Round2Controller {
                     p1ScoreLabels[currentQuestionIndex].setText(String.valueOf(score));
                     totalScore += score;
                     totalScoreLabel.setText("Total: " + totalScore);
+                    playSound("src/family-feud-ding.mp3");
                     System.out.println("  Revealed: " + player1Answers[currentQuestionIndex] + " = " + score + " pts | Total: " + totalScore);
                     currentQuestionIndex++;
                     if (currentQuestionIndex < round2Questions.size()) {
@@ -283,6 +286,7 @@ public class Round2Controller {
                     int score = player2Scores[currentQuestionIndex];
                     p2ScoreLabels[currentQuestionIndex].setText(String.valueOf(score));
                     totalScore += score;
+                    playSound("src/family-feud-ding.mp3");
                     totalScoreLabel.setText("Total: " + totalScore);
                     System.out.println("  Revealed: " + player2Answers[currentQuestionIndex] + " = " + score + " pts | Total: " + totalScore);
                     currentQuestionIndex++;
