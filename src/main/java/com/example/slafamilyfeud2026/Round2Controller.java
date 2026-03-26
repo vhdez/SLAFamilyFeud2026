@@ -32,6 +32,8 @@ public class Round2Controller {
     public Label totalScoreLabel;
     public Label phaseLabel;
     public ImageView backgroundImage;
+    public Media correctNoise;
+    public Media incorrectNoise;
 
     public Label answer1, answer2, answer3, answer4, answer5;
     public Label answer6, answer7, answer8, answer9, answer10;
@@ -64,6 +66,7 @@ public class Round2Controller {
     private Label[] p2AnswerLabels;
     private Label[] p2ScoreLabels;
     private final ArrayList<Integer> questionNumbers =  new ArrayList<>();
+
 
     @FXML
     public void initialize() throws Exception {
@@ -111,6 +114,11 @@ public class Round2Controller {
         clearBoard();
         displayInstructions();
         displayCurrentQuestion();
+
+        String soundPath1 = Paths.get("src/correct-answer-ff.mp3").toUri().toString();
+        correctNoise = new Media(soundPath1);
+        String soundPath2 = Paths.get("src/wrong-answer-sound-effect.mp3").toUri().toString();
+        incorrectNoise = new Media(soundPath2);
     }
 
     public void setupHandlers() {
@@ -158,7 +166,7 @@ public class Round2Controller {
         } else if (event.getCode() == KeyCode.H) {
             displayInstructions();
         } else if (event.getCode() == KeyCode.DIGIT0) {
-            playSound("src/wrong-answer-sound-effect.mp3");
+            playSound( incorrectNoise);
             System.out.print(" WRONG ");
         } else if (event.getCode() == KeyCode.T) {
             startTimer();
@@ -197,7 +205,7 @@ public class Round2Controller {
                 if (player1Answers[currentQuestionIndex] != null &&
                         player1Answers[currentQuestionIndex].equalsIgnoreCase(wrongAnswer)) {
                     System.out.println("  [!] Player 2 can't give the same answer as Player 1!");
-                    playSound("src/wrong-answer-sound-effect.mp3");
+                    playSound(incorrectNoise);
                     return;
                 }
                 player2Answers[currentQuestionIndex] = wrongAnswer;
@@ -231,7 +239,7 @@ public class Round2Controller {
                 if (player1Answers[currentQuestionIndex] != null &&
                         player1Answers[currentQuestionIndex].equalsIgnoreCase(chosen.getAnAnswer())) {
                     System.out.println("  [!] Player 2 can't give the same answer as Player 1!");
-                    playSound("src/wrong-answer-sound-effect.mp3");
+                    playSound(incorrectNoise);
                     return;
                 }
                 player2Answers[currentQuestionIndex] = chosen.getAnAnswer();
@@ -336,10 +344,9 @@ public class Round2Controller {
         displayCurrentQuestion();
     }
 
-    public void playSound(String audioFilePath) throws Exception {
+    public void playSound(Media sound) throws Exception {
         try {
-            String soundPath = Paths.get(audioFilePath).toUri().toString();
-            Media sound = new Media(soundPath);
+
             MediaPlayer mediaPlayer = new MediaPlayer(sound);
             mediaPlayer.play();
         } catch (Exception e) {
