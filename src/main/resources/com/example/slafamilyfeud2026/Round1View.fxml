@@ -147,7 +147,7 @@
                      <Font name="Times New Roman" size="50.0" />
                   </font>
                </Label>
-               <Label fx:id="team2NameLabel" alignment="CENTER" layoutX="795.0" layoutY="35.0" prefHeight="100.0" prefWidth="193.0" text="Team 2" textAlignment="CENTER" textFill="WHITE">
+               <Label fx:id="team2NameLabel" alignment="CENTER" layoutX="795.0" layoutY="31.0" prefHeight="100.0" prefWidth="193.0" text="Team 2" textAlignment="CENTER" textFill="WHITE">
                   <font>
                      <Font name="Times New Roman" size="50.0" />
                   </font>

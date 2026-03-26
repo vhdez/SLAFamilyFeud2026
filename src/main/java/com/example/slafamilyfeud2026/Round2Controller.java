@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -31,6 +32,8 @@ public class Round2Controller {
     public Label totalScoreLabel;
     public Label phaseLabel;
     public ImageView backgroundImage;
+    public Media correctNoise;
+    public Media incorrectNoise;
 
     public Label answer1, answer2, answer3, answer4, answer5;
     public Label answer6, answer7, answer8, answer9, answer10;
@@ -64,6 +67,7 @@ public class Round2Controller {
     private Label[] p2ScoreLabels;
     private final ArrayList<Integer> questionNumbers =  new ArrayList<>();
 
+
     @FXML
     public void initialize() throws Exception {
         pain.setPrefSize(1066, 600);
@@ -89,9 +93,9 @@ public class Round2Controller {
 //            round2Questions.add(all.get(i));
 //        }
 
-        //Question.setTest2Questions(); // Test Set
-        questionNumbers.addAll(Arrays.asList(13, 19, 14, 28, 16)); // Use this during the actual game, change based on question numbers
-        Question.setRound2Questions(questionNumbers);
+        Question.setTest2Questions(); // Test Set
+        //questionNumbers.addAll(Arrays.asList(13, 11, 14, 2, 3)); // Use this during the actual game, change based on question numbers
+        //Question.setRound2Questions(questionNumbers);
 
         round2Questions = Question.getRound2Questions();
 
@@ -110,6 +114,11 @@ public class Round2Controller {
         clearBoard();
         displayInstructions();
         displayCurrentQuestion();
+
+        String soundPath1 = Paths.get("src/correct-answer-ff.mp3").toUri().toString();
+        correctNoise = new Media(soundPath1);
+        String soundPath2 = Paths.get("src/wrong-answer-sound-effect.mp3").toUri().toString();
+        incorrectNoise = new Media(soundPath2);
     }
 
     public void setupHandlers() {
@@ -157,7 +166,7 @@ public class Round2Controller {
         } else if (event.getCode() == KeyCode.H) {
             displayInstructions();
         } else if (event.getCode() == KeyCode.DIGIT0) {
-            playSound("src/wrong-answer-sound-effect.mp3");
+            playSound( incorrectNoise);
             System.out.print(" WRONG ");
         } else if (event.getCode() == KeyCode.T) {
             startTimer();
@@ -196,7 +205,7 @@ public class Round2Controller {
                 if (player1Answers[currentQuestionIndex] != null &&
                         player1Answers[currentQuestionIndex].equalsIgnoreCase(wrongAnswer)) {
                     System.out.println("  [!] Player 2 can't give the same answer as Player 1!");
-                    playSound("src/wrong-answer-sound-effect.mp3");
+                    playSound(incorrectNoise);
                     return;
                 }
                 player2Answers[currentQuestionIndex] = wrongAnswer;
@@ -231,7 +240,7 @@ public class Round2Controller {
                 if (player1Answers[currentQuestionIndex] != null &&
                         player1Answers[currentQuestionIndex].equalsIgnoreCase(chosen.getAnAnswer())) {
                     System.out.println("  [!] Player 2 can't give the same answer as Player 1!");
-                    playSound("src/wrong-answer-sound-effect.mp3");
+                    playSound(incorrectNoise);
                     return;
                 }
                 player2Answers[currentQuestionIndex] = chosen.getAnAnswer();
@@ -306,20 +315,13 @@ public class Round2Controller {
     }
 
     public void fitTextToLabel(Label label) {
-        label.setWrapText(false);
-        double fontSize = 40.0;
-        double maxWidth = 303.0;
-        String family = label.getFont().getFamily();
-        while (label.getText() != null && !label.getText().isEmpty() && fontSize > 6) {
-            label.setFont(javafx.scene.text.Font.font(family, fontSize));
-            Text helper = new Text(label.getText());
-            helper.setFont(label.getFont());
-            if (helper.getBoundsInLocal().getWidth() <= maxWidth - 10) {
-                break;
-            }
-            fontSize -= 1;
+        int answerLength = label.getText().length();
+        int excessLength = answerLength - 16;
+        if (excessLength > 0) {
+            label.setFont(new Font("Times New Roman", 40-(excessLength*2)));
+        } else {
+            label.setFont(new Font("Times New Roman", 40));
         }
-        label.setFont(javafx.scene.text.Font.font(family, fontSize));
     }
 
     public void clearBoard() {
@@ -346,10 +348,9 @@ public class Round2Controller {
         displayCurrentQuestion();
     }
 
-    public void playSound(String audioFilePath) throws Exception {
+    public void playSound(Media sound) throws Exception {
         try {
-            String soundPath = Paths.get(audioFilePath).toUri().toString();
-            Media sound = new Media(soundPath);
+
             MediaPlayer mediaPlayer = new MediaPlayer(sound);
             mediaPlayer.play();
         } catch (Exception e) {
