@@ -88,7 +88,7 @@ public class Round1Controller {
         Question.readQuestions();
 
         //Question.setTest1Questions(); // Test Set
-        questionNumbers.addAll(Arrays.asList(6, 8, 12, 29)); // Use this during the actual game, change based on question numbers
+        questionNumbers.addAll(Arrays.asList(6, 8, 12, 1)); // Use this during the actual game, change based on question numbers
         Question.setRound1Questions(questionNumbers);
 
         this.nextQuestion();

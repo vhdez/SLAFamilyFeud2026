@@ -90,7 +90,7 @@ public class Round2Controller {
 //        }
 
         //Question.setTest2Questions(); // Test Set
-        questionNumbers.addAll(Arrays.asList(13, 19, 14, 28, 16)); // Use this during the actual game, change based on question numbers
+        questionNumbers.addAll(Arrays.asList(13, 11, 14, 2, 3)); // Use this during the actual game, change based on question numbers
         Question.setRound2Questions(questionNumbers);
 
         round2Questions = Question.getRound2Questions();
