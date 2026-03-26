@@ -34,6 +34,9 @@ public class Round2Controller {
     public ImageView backgroundImage;
     public Media correctNoise;
     public Media incorrectNoise;
+    public Media dingNoise;
+    public Media intenseNoise;
+    public Media youSaidNoise;
 
     public Label answer1, answer2, answer3, answer4, answer5;
     public Label answer6, answer7, answer8, answer9, answer10;
@@ -119,6 +122,12 @@ public class Round2Controller {
         correctNoise = new Media(soundPath1);
         String soundPath2 = Paths.get("src/wrong-answer-sound-effect.mp3").toUri().toString();
         incorrectNoise = new Media(soundPath2);
+        String soundPath3 = Paths.get("src/family-feud-ding.mp3").toUri().toString();
+        dingNoise = new Media(soundPath1);
+        String soundPath4 = Paths.get("src/family-feud-intense.mp3").toUri().toString();
+        intenseNoise = new Media(soundPath1);
+        String soundPath5 = Paths.get("src/family-feud-you-said.mp3").toUri().toString();
+        youSaidNoise = new Media(soundPath1);
     }
 
     public void setupHandlers() {
@@ -234,7 +243,7 @@ public class Round2Controller {
                 p1AnswerLabels[currentQuestionIndex].setText(chosen.getAnAnswer());
                 fitTextToLabel(p1AnswerLabels[currentQuestionIndex]);
                 p1ScoreLabels[currentQuestionIndex].setText("?");
-                playSound("src/family-feud-you-said.mp3");
+                playSound(youSaidNoise);
                 System.out.print(" " + (answerIndex + 1) + " ");
             } else if (currentPhase == 3) {
                 if (player1Answers[currentQuestionIndex] != null &&
@@ -247,7 +256,7 @@ public class Round2Controller {
                 player2Scores[currentQuestionIndex] = chosen.getItsScore();
                 p2AnswerLabels[currentQuestionIndex].setText(chosen.getAnAnswer());
                 fitTextToLabel(p2AnswerLabels[currentQuestionIndex]);
-                playSound("src/family-feud-you-said.mp3");
+                playSound(youSaidNoise);
                 p2ScoreLabels[currentQuestionIndex].setText("?");
                 System.out.print(" " + (answerIndex + 1) + " ");
             }
@@ -279,7 +288,7 @@ public class Round2Controller {
                     p1ScoreLabels[currentQuestionIndex].setText(String.valueOf(score));
                     totalScore += score;
                     totalScoreLabel.setText("Total: " + totalScore);
-                    playSound("src/family-feud-ding.mp3");
+                    playSound(dingNoise);
                     System.out.println("  Revealed: " + player1Answers[currentQuestionIndex] + " = " + score + " pts | Total: " + totalScore);
                     currentQuestionIndex++;
                     if (currentQuestionIndex < round2Questions.size()) {
@@ -295,7 +304,7 @@ public class Round2Controller {
                     int score = player2Scores[currentQuestionIndex];
                     p2ScoreLabels[currentQuestionIndex].setText(String.valueOf(score));
                     totalScore += score;
-                    playSound("src/family-feud-ding.mp3");
+                    playSound(dingNoise);
                     totalScoreLabel.setText("Total: " + totalScore);
                     System.out.println("  Revealed: " + player2Answers[currentQuestionIndex] + " = " + score + " pts | Total: " + totalScore);
                     currentQuestionIndex++;
