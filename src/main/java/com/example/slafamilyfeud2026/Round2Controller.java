@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -89,9 +90,9 @@ public class Round2Controller {
 //            round2Questions.add(all.get(i));
 //        }
 
-        //Question.setTest2Questions(); // Test Set
-        questionNumbers.addAll(Arrays.asList(13, 11, 14, 2, 3)); // Use this during the actual game, change based on question numbers
-        Question.setRound2Questions(questionNumbers);
+        Question.setTest2Questions(); // Test Set
+        //questionNumbers.addAll(Arrays.asList(13, 11, 14, 2, 3)); // Use this during the actual game, change based on question numbers
+        //Question.setRound2Questions(questionNumbers);
 
         round2Questions = Question.getRound2Questions();
 
@@ -302,20 +303,13 @@ public class Round2Controller {
     }
 
     public void fitTextToLabel(Label label) {
-        label.setWrapText(false);
-        double fontSize = 40.0;
-        double maxWidth = 303.0;
-        String family = label.getFont().getFamily();
-        while (label.getText() != null && !label.getText().isEmpty() && fontSize > 6) {
-            label.setFont(javafx.scene.text.Font.font(family, fontSize));
-            Text helper = new Text(label.getText());
-            helper.setFont(label.getFont());
-            if (helper.getBoundsInLocal().getWidth() <= maxWidth - 10) {
-                break;
-            }
-            fontSize -= 1;
+        int answerLength = label.getText().length();
+        int excessLength = answerLength - 16;
+        if (excessLength > 0) {
+            label.setFont(new Font("Times New Roman", 40-(excessLength*2)));
+        } else {
+            label.setFont(new Font("Times New Roman", 40));
         }
-        label.setFont(javafx.scene.text.Font.font(family, fontSize));
     }
 
     public void clearBoard() {
