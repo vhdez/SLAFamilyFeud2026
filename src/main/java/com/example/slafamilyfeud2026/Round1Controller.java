@@ -325,7 +325,7 @@ public class Round1Controller {
         int answerLength = answer.length();
         int excessLength = answerLength - 9;
         if (excessLength > 0) {
-            label.setFont(new Font("Times New Roman", 50* Math.min ((9f/(answerLength)),1)));
+            label.setFont(new Font("Times New Roman", 60* Math.min ((8f/(answerLength)),1)));
         }
         st.setAutoReverse(true);
         st.setCycleCount(2); // One cycle down, one cycle up
