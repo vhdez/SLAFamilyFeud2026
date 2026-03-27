@@ -142,14 +142,14 @@
                      <Font name="Times New Roman" size="50.0" />
                   </font>
                </Label>
-               <Label fx:id="team1NameLabel" alignment="CENTER" layoutX="80.0" layoutY="31.0" prefHeight="100.0" prefWidth="193.0" text="Team 1" textFill="WHITE">
+               <Label fx:id="team1NameLabel" alignment="CENTER" layoutX="80.0" layoutY="31.0" prefHeight="100.0" prefWidth="193.0" text="Blossom Bosses" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                   <font>
-                     <Font name="Times New Roman" size="50.0" />
+                     <Font name="Times New Roman" size="32.0" />
                   </font>
                </Label>
-               <Label fx:id="team2NameLabel" alignment="CENTER" layoutX="795.0" layoutY="31.0" prefHeight="100.0" prefWidth="193.0" text="Team 2" textAlignment="CENTER" textFill="WHITE">
+               <Label fx:id="team2NameLabel" alignment="CENTER" layoutX="795.0" layoutY="31.0" prefHeight="100.0" prefWidth="193.0" text="Bikini Bottom Squirrels" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                   <font>
-                     <Font name="Times New Roman" size="50.0" />
+                     <Font name="Times New Roman" size="32.0" />
                   </font>
                </Label>
             

@@ -65,6 +65,8 @@ public class Round1Controller {
     private Question currentQuestion;
     private final ArrayList<Integer> questionNumbers =  new ArrayList<>();
 
+    private boolean isRevealMode = false;
+
     public void initialize() throws Exception {
         pain.setPrefSize(1066, 600);
 
@@ -160,8 +162,14 @@ public class Round1Controller {
             System.out.print(" C ");
         } else if (event.getCode() == KeyCode.H){
             this.displayInstructions();
+        } else if (event.getCode() == KeyCode.DIGIT0) {
+            isRevealMode = !isRevealMode;
         } else {
-            currentQuestion(event.getCode());
+            if (isRevealMode) {
+                revealAnswers(event.getCode());
+            } else {
+                currentQuestion(event.getCode());
+            }
         }
     }
 
@@ -388,6 +396,7 @@ public class Round1Controller {
         );
         XsCount = 0;
         stealRound = false;
+        isRevealMode = false;
     }
 
     public void wrongAnswer() {
@@ -456,5 +465,97 @@ public class Round1Controller {
         team1Score.setText(String.valueOf(team1score));
         team2Score.setText(String.valueOf(team2score));
         roundScore.setText(String.valueOf(currentRoundScore));
+    }
+
+    public void revealAnswers(KeyCode keyCode) {
+        if (keyCode == KeyCode.DIGIT1) {
+            if (currentQuestion.getTheAnswers().isEmpty()) {
+                return;
+            }
+            if (!currentQuestion.getTheAnswers().getFirst().getAnswered()) {
+                currentQuestion.getTheAnswers().getFirst().setAnswered(true);
+                labelTransition(Answer1, currentQuestion.getTheAnswers().getFirst().getAnAnswer());
+                labelTransition(score1, currentQuestion.getTheAnswers().getFirst().getItsScore().toString());
+                System.out.print(" 1 ");
+                playSound(correctNoise);
+            }
+        } else if (keyCode == KeyCode.DIGIT2) {
+            if (currentQuestion.getTheAnswers().size() < 2) {
+                return;
+            }
+            if (!currentQuestion.getTheAnswers().get(1).getAnswered()) {
+                currentQuestion.getTheAnswers().get(1).setAnswered(true);
+                labelTransition(Answer2, currentQuestion.getTheAnswers().get(1).getAnAnswer());
+                labelTransition(score2, currentQuestion.getTheAnswers().get(1).getItsScore().toString());
+                System.out.print(" 2 ");
+                playSound(correctNoise);
+            }
+        } else if (keyCode == KeyCode.DIGIT3) {
+            if (currentQuestion.getTheAnswers().size() < 3) {
+                return;
+            }
+            if (!currentQuestion.getTheAnswers().get(2).getAnswered()) {
+                currentQuestion.getTheAnswers().get(2).setAnswered(true);
+                labelTransition(Answer3, currentQuestion.getTheAnswers().get(2).getAnAnswer());
+                labelTransition(score3, currentQuestion.getTheAnswers().get(2).getItsScore().toString());
+                System.out.print(" 3 ");
+                playSound(correctNoise);
+            }
+        } else if (keyCode == KeyCode.DIGIT4) {
+            if (currentQuestion.getTheAnswers().size() < 4) {
+                return;
+            }
+            if (!currentQuestion.getTheAnswers().get(3).getAnswered()) {
+                currentQuestion.getTheAnswers().get(3).setAnswered(true);
+                labelTransition(Answer4, currentQuestion.getTheAnswers().get(3).getAnAnswer());
+                labelTransition(score4, currentQuestion.getTheAnswers().get(3).getItsScore().toString());
+                System.out.print(" 4 ");
+                playSound(correctNoise);
+            }
+        } else if (keyCode == KeyCode.DIGIT5) {
+            if (currentQuestion.getTheAnswers().size() < 5) {
+                return;
+            }
+            if (!currentQuestion.getTheAnswers().get(4).getAnswered()) {
+                currentQuestion.getTheAnswers().get(4).setAnswered(true);
+                labelTransition(Answer5, currentQuestion.getTheAnswers().get(4).getAnAnswer());
+                labelTransition(score5, currentQuestion.getTheAnswers().get(4).getItsScore().toString());
+                System.out.print(" 5 ");
+                playSound(correctNoise);
+            }
+        } else if (keyCode == KeyCode.DIGIT6) {
+            if (currentQuestion.getTheAnswers().size() < 6) {
+                return;
+            }
+            if (!currentQuestion.getTheAnswers().get(5).getAnswered()) {
+                currentQuestion.getTheAnswers().get(5).setAnswered(true);
+                labelTransition(Answer6, currentQuestion.getTheAnswers().get(5).getAnAnswer());
+                labelTransition(score6, currentQuestion.getTheAnswers().get(5).getItsScore().toString());
+                System.out.print(" 6 ");
+                playSound(correctNoise);
+            }
+        } else if (keyCode == KeyCode.DIGIT7) {
+            if (currentQuestion.getTheAnswers().size() < 7) {
+                return;
+            }
+            if (!currentQuestion.getTheAnswers().get(6).getAnswered()) {
+                currentQuestion.getTheAnswers().get(6).setAnswered(true);
+                labelTransition(Answer7, currentQuestion.getTheAnswers().get(6).getAnAnswer());
+                labelTransition(score7, currentQuestion.getTheAnswers().get(6).getItsScore().toString());
+                System.out.print(" 7 ");
+                playSound(correctNoise);
+            }
+        } else if (keyCode == KeyCode.DIGIT8) {
+            if (currentQuestion.getTheAnswers().size() < 8) {
+                return;
+            }
+            if (!currentQuestion.getTheAnswers().get(7).getAnswered()) {
+                currentQuestion.getTheAnswers().get(7).setAnswered(true);
+                labelTransition(Answer8, currentQuestion.getTheAnswers().get(7).getAnAnswer());
+                labelTransition(score8, currentQuestion.getTheAnswers().get(7).getItsScore().toString());
+                System.out.print(" 8 ");
+                playSound(correctNoise);
+            }
+        }
     }
 }
