@@ -70,8 +70,8 @@ public class Round2Controller {
     private Label[] p2ScoreLabels;
     private final ArrayList<Integer> questionNumbers =  new ArrayList<>();
 
-    private String[] hiddenPlayer1Answers;
-    private String[] hiddenPlayer1Scores;
+    private String[] hiddenAnswers;
+    private String[] hiddenScores;
 
     private Scanner scanner;
 
@@ -349,28 +349,37 @@ public class Round2Controller {
     }
 
     public void hidePlayer1Answers() {
-        hiddenPlayer1Answers = new String[5];
-        hiddenPlayer1Scores  = new String[6];
+        hiddenAnswers = new String[10];
+        hiddenScores  = new String[11];
 
         for (int i = 0; i < 5; i++) {
-            hiddenPlayer1Answers[i] = p1AnswerLabels[i].getText();
-            hiddenPlayer1Scores[i] = p1ScoreLabels[i].getText();
+            hiddenAnswers[i] = p1AnswerLabels[i].getText();
+            hiddenScores[i] = p1ScoreLabels[i].getText();
             p1AnswerLabels[i].setText("");
             p1ScoreLabels[i].setText("");
         }
-        hiddenPlayer1Scores[5] = totalScoreLabel.getText();
+        for (int i = 0; i < 5; i++) {
+            hiddenAnswers[i+5] = p2AnswerLabels[i].getText();
+            hiddenScores[i+5] = p2ScoreLabels[i].getText();
+            p2AnswerLabels[i].setText("");
+            p2ScoreLabels[i].setText("");
+        }
+        hiddenScores[10] = totalScoreLabel.getText();
         totalScoreLabel.setText("");
     }
 
     public void revealPlayer1Answers() {
         playSound(youSaidNoise);
         for (int i = 0; i < 5; i++) {
-            p1AnswerLabels[i].setText(hiddenPlayer1Answers[i]);
-            p1ScoreLabels[i].setText(hiddenPlayer1Scores[i]);
+            p1AnswerLabels[i].setText(hiddenAnswers[i]);
+            p1ScoreLabels[i].setText(hiddenScores[i]);
         }
-        totalScoreLabel.setText(hiddenPlayer1Scores[5]);
+        for (int i = 0; i < 5; i++) {
+            p2AnswerLabels[i].setText(hiddenAnswers[i+5]);
+            p2ScoreLabels[i].setText(hiddenScores[i+5]);
+        }
+        totalScoreLabel.setText(hiddenScores[10]);
     }
-
 
     public void clearBoard() {
         for (int i = 0; i < 5; i++) {
