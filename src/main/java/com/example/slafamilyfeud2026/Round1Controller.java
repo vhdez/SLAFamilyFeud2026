@@ -164,6 +164,10 @@ public class Round1Controller {
             this.displayInstructions();
         } else if (event.getCode() == KeyCode.DIGIT0) {
             isRevealMode = !isRevealMode;
+        } else if (event.getCode() == KeyCode.Z) {
+            x1.setVisible(true);
+            playSound(wrongNoise);
+            System.out.print(" Z (BUZZER WRONG) ");
         } else {
             if (isRevealMode) {
                 revealAnswers(event.getCode());
@@ -172,6 +176,8 @@ public class Round1Controller {
             }
         }
     }
+
+
 
     public void selectTeam(int newTeam) {
         currentTeam = newTeam;
@@ -398,6 +404,8 @@ public class Round1Controller {
         stealRound = false;
         isRevealMode = false;
     }
+
+
 
     public void wrongAnswer() {
         if (stealRound) {
